@@ -1,7 +1,7 @@
 import { cors_allow_origin } from '@config/socketIO_config';
 import logger from '@shared/Logger';
 import SocketIO , {Socket} from 'socket.io';
-
+//import modelSocket from '@in-memory-data/model-socket';
 
 let cors = {};
 
@@ -22,6 +22,7 @@ const connectedClientSocket : Map<string,Socket> = new Map();
 io.on('connection' , (socket : Socket) => {
     logger.info(`Socket Connection from ${socket.request.socket.remoteAddress} established`);
 
+    // On new connection
     connectedClientSocket.set(socket.id , socket);
 
     socket.on('disconnect' , reason => {

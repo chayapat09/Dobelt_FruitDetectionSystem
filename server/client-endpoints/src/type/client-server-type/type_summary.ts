@@ -2,8 +2,8 @@ import {IModel} from './type_model'
 
 export interface ISummary {
     //model_id : string ;
-    detected : number ;// int
-    defected : number ;// int
+    detected : number ; // int
+    defected : number ; // int
     normal : number ; // int
 
 }

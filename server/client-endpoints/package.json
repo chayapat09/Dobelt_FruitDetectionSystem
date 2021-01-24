@@ -24,7 +24,8 @@
     "@shared": "dist/shared",
     "@serverExpress": "dist/Server.Express",
     "@serverSocketIO": "dist/Server.SocketIO",
-    "@config": "dist/config"
+    "@config": "dist/config" , 
+    "@in-memory-data": "dist/in-memory-data"
   },
   "eslintConfig": {
     "parser": "@typescript-eslint/parser",
