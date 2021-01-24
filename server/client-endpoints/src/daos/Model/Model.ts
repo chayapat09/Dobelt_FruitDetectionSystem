@@ -1,5 +1,6 @@
 import database from "@daos/db_connector";
 import { IModel } from "@entities/Model";
+import { ObjectID } from "mongodb";
 
 export interface IModelDao {
     getOne: (_id: string) => Promise<IModel | null>;
@@ -22,7 +23,7 @@ class ModelDao implements IModelDao {
         // TODO
         const db = await database.getDb()
         const collection = db.collection(ModelDao.collectionName);
-        const document = await collection.findOne<IModel>({_id : _id});
+        const document = await collection.findOne<IModel>({_id : new ObjectID(_id)});
         
         return document;
     }
@@ -47,7 +48,10 @@ class ModelDao implements IModelDao {
     public async add(model: IModel): Promise<void> {
         const db = await database.getDb()
         const collection = db.collection(ModelDao.collectionName);
-        const result = await collection.insertOne(model);    
+        const addDoc : any = {...model};
+        delete addDoc._id;
+
+        const result = await collection.insertOne(addDoc);    
     }
 
 
@@ -71,9 +75,9 @@ class ModelDao implements IModelDao {
     public async delete(_id: string): Promise<void> {
         const db = await database.getDb()
         const collection = db.collection(ModelDao.collectionName);
-        const result = await collection.deleteOne({_id : _id});
+        const result = await collection.deleteOne({_id :new ObjectID(_id)});
         if (!result.result.ok) throw Error(`Delete Database failed @Model _id : ${_id}`);
     }
 }
 
-export default ModelDao;
+export default new ModelDao();
