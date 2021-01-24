@@ -75,8 +75,11 @@
       "@shared/*": [
         "src/shared/*"
       ],
-      "@server": [
-        "src/Server"
+      "@serverExpress": [
+        "src/Server.Express"
+      ],
+      "@serverSocketIO": [
+        "src/Server.SocketIO"
       ],
       "@config/*" : [
         "src/config/*"

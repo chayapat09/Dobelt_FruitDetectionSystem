@@ -1,0 +1,1 @@
+export const cors_allow_origin = ["http://localhost:3000"];

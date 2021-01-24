@@ -1,5 +1,6 @@
 import {Db , MongoClient} from 'mongodb';
 import { MONGO_DB_NAME, MONGO_URL } from '@config/mongo_config'
+import logger from '@shared/Logger';
 
 class Database {
     static url = MONGO_URL;
@@ -23,18 +24,18 @@ class Database {
             .then((client) => {
                 this.client = client;
                 client.isConnected()
-                console.log('Database Connected!');
+                logger.info('Database Connected!');
             })
     }
 
     public async getDb() : Promise<Db> {
         if (this.client === null || !this.client.isConnected()) {
-            console.log('Reconnecting Database!');
+            logger.info('Reconnecting Database!');
             try {
                 await this.connect()
             }
             catch (err) {
-                console.log(`Connecting To database Failed Message :\n ${err.message}`);
+                logger.info(`Connecting To database Failed Message :\n ${err.message}`);
             }
         }
 
