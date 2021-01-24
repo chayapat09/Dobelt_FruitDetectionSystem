@@ -77,7 +77,10 @@
       ],
       "@server": [
         "src/Server"
-      ]
+      ],
+      "@config/*" : [
+        "src/config/*"
+      ],
     },
   },
   "include": [

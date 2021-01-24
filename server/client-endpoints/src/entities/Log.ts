@@ -6,7 +6,7 @@ export interface ILog {
     result : number ; 
 }
 
-class Log implements ILog,IValidable {
+export class Log implements ILog,IValidable {
     static RESULT_DEFECTED = 1;
     static RESULT_NORMAL = 0;
 

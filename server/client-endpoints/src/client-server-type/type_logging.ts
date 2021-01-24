@@ -1,3 +1,4 @@
+import { query_filter } from "@shared/enum";
 import { IModel, IModelDetail } from "./type_model";
 
 export interface ILogging {
@@ -13,9 +14,9 @@ export interface ILog {
 
 // filter params
 
-const NO_FILTER = 0;
-const NORMAL_ONLY = 1;
-const DEFECTED_ONLY = 2;
+const NO_FILTER = query_filter.NO_FILTER; // 0 
+const NORMAL_ONLY = query_filter.NORMAL_ONLY; // 1
+const DEFECTED_ONLY = query_filter.DEFECTED_ONLY; // 2
 
 export interface ILogQueryParam {
     model_id : string ; 

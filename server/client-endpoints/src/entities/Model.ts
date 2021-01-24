@@ -19,4 +19,3 @@ class Model implements IModel {
     }
 
 }
-

@@ -1,5 +1,5 @@
 import {Db , MongoClient} from 'mongodb';
-import { MONGO_DB_NAME, MONGO_URL } from 'src/config/mongo_config';
+import { MONGO_DB_NAME, MONGO_URL } from '@config/mongo_config'
 
 class Database {
     static url = MONGO_URL;
