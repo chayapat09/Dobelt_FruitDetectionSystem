@@ -1,25 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import NavbarPage from './Components/NavbarPage';
+import RobotState from './Components/RobotState';
+import Summary from './Components/Summary';
+import Logging from './Components/Logging';
+import ModelManiputlation from './Components/ModelManiputlation';
+
+const robotState = () => <RobotState />
+const summary = () => <Summary />
+const logging = () => <Logging />
+const modelManiputlation = () => <ModelManiputlation />
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div>
+        <NavbarPage />
+        <Switch>
+          <Route exact path='/' component={robotState}/>
+          <Route path = '/Summary' component={summary}/>
+          <Route path = '/Logging' component={logging}/>
+          <Route path = '/Gallery'/>
+          <Route path = '/ModelManiputlation' component={modelManiputlation}/>
+          <Route path = '*'/>
+        </Switch>  
+      </div>
+    </Router>
   );
 }
 
