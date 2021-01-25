@@ -7,7 +7,8 @@ const router = Router();
  ******************************************************************************/
 
 router.get('/' , async ( req : Request , res : Response ) => {
-    await getModels(req , res);
+    const models = await getModels();
+    res.json(models);
 });
 
 
@@ -16,7 +17,8 @@ router.get('/' , async ( req : Request , res : Response ) => {
  *                       Add One Model - "POST /api/model"
  ******************************************************************************/
 router.post('/' , async(req : Request , res : Response ) => {
-    await addModel(req , res);
+    await addModel(req.body);
+    res.json({ok : true});
 });
 
 
@@ -25,7 +27,8 @@ router.post('/' , async(req : Request , res : Response ) => {
  *                       Delete One Model - "Delete /api/model"
  ******************************************************************************/
 router.delete('/' , async (req : Request , res : Response ) => {
-    await deleteModel(req , res);
+    await deleteModel(req.body._id);
+    res.json({ok : true});
 });
 
 

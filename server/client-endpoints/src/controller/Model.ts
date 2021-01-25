@@ -3,21 +3,22 @@ import { IModel } from '@entities/Model';
 import {Request , Response} from 'express';
 
 const modelDao = new ModelDao();
-export async function getModels(req : Request , res : Response) {
+export async function getModels() : Promise<IModel[]> {
 
     const models = await modelDao.getAll();
-    res.json(models);
+
+    return models;
 }
 
-export async function addModel(req : Request , res : Response) {
-    const model : IModel = req.body;
+export async function addModel(model : IModel) : Promise<void> {
+
     await modelDao.add(model);
-    res.json({ok : true})
+    
 }
 
-export async function deleteModel(req : Request , res : Response) {
-    const _id = req.body._id;
+export async function deleteModel(_id : string) :Promise<void> {
+
     await modelDao.delete(_id);
-    res.json({ok : true});
+
 }
 // TODO - type validation !!
