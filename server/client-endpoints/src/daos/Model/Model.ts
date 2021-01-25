@@ -80,4 +80,4 @@ class ModelDao implements IModelDao {
     }
 }
 
-export default new ModelDao();
+export default ModelDao;

@@ -11,3 +11,6 @@ export enum field_result {
 }
 
 
+// TODO Moved query to daos
+
+// field Res to entites

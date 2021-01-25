@@ -35,7 +35,7 @@ class Database {
                 await this.connect()
             }
             catch (err) {
-                logger.info(`Connecting To database Failed Message :\n ${err.message}`);
+                logger.info(`Failed to Connect with database Error Message :\n ${err.message}`);
             }
         }
 
