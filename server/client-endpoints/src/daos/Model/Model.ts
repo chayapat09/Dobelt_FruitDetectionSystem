@@ -13,7 +13,7 @@ export interface IModelDao {
 
 // Used exception interupted as if Error on database happen
 
-class ModelDao implements IModelDao {
+export class ModelDao implements IModelDao {
     static collectionName = 'Model';
 
     /**
@@ -79,5 +79,5 @@ class ModelDao implements IModelDao {
         if (!result.result.ok) throw Error(`Delete Database failed @Model _id : ${_id}`);
     }
 }
-
-export default ModelDao;
+const modelDao = new ModelDao();
+export default modelDao;

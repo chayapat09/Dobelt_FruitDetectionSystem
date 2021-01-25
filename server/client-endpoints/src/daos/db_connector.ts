@@ -18,8 +18,9 @@ class Database {
         return MongoClient.connect(
             Database.url,
             {
-                reconnectInterval : 1000 , 
-                reconnectTries : 30
+                // reconnectInterval : 1000 , 
+                // reconnectTries : 30 , 
+                useUnifiedTopology : true,
             })
             .then((client) => {
                 this.client = client;

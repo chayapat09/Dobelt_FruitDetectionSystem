@@ -1,8 +1,8 @@
 import database from '@daos/db_connector';
-import {ILog} from '@entities/Log';
+import {ILog, Log} from '@entities/Log';
 import {query_filter} from '@shared/enum';
 import { ObjectID } from 'mongodb';
-import ModelDao from '@daos/Model/Model';
+import {ModelDao} from '@daos/Model/Model';
 export interface ILogQuery {
     filter : query_filter ; 
     model_id : string ;
@@ -55,10 +55,12 @@ export class LogDao implements ILogDao {
         // This Method Access ModelCollection First
         const db = await database.getDb();
         const collection = db.collection(ModelDao.collectionName);
+
+        // No need this hard query !! -> Good point is when Model was deleted this will return []
         const result = await collection.aggregate([
             {
                 $match : {
-                    _id : query.model_id
+                    _id : new ObjectID(query.model_id)
                 }
             },
             { 
@@ -77,15 +79,18 @@ export class LogDao implements ILogDao {
                             input : '$logs',
                             as : 'log',
                             cond : {
-                                $eq : ['$$log.result' , query.filter]
+                                $eq : [
+                                    '$$log.result' , 
+                                    query.filter === query_filter.NORMAL_ONLY 
+                                    ? Log.RESULT_NORMAL : Log.RESULT_DEFECTED
+                                ] 
                             }
                         }
                     }
                 }
             }
         ]).toArray();
-
-        return result[0].logs;
+        return result.length > 0 ?  result[0].logs : [];
     }
 
 
@@ -97,7 +102,10 @@ export class LogDao implements ILogDao {
 
         const db = await database.getDb();
         const collection = db.collection(LogDao.collectionName);
-        const result = await collection.insertOne(log);
+        const addDoc : any = {...log};
+        delete addDoc._id;
+        addDoc.model_id = new ObjectID(addDoc.model_id);
+        const result = await collection.insertOne(addDoc);
 
         if (!result.result.ok) throw Error('Insert Log into Database Failed');
 
@@ -129,4 +137,5 @@ export class LogDao implements ILogDao {
         //return Promise.resolve(undefined);
     }
 }
-
+const logDao = new LogDao();
+export default logDao;
