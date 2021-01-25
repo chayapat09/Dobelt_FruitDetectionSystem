@@ -84,6 +84,9 @@
       "@config/*" : [
         "src/config/*"
       ],
+      "@in-memory-data/*" : [
+        "src/in-memory-data/*"
+      ],
     },
   },
   "include": [

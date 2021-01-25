@@ -1,18 +1,18 @@
 export interface IModel {
-    id : string ;
+    _id : string ;
     model_name : string ;
     fruit_name : string ;
 }
 
 class Model implements IModel {
 
-    public id : string ;
+    public _id : string ;
     public model_name : string ;
     public fruit_name : string ;
 
-    constructor(model_name : string , fruit_name : string , id? : string  ) {
+    constructor(model_name : string , fruit_name : string , _id? : string  ) {
 
-        this.id = id || '';
+        this._id = _id || '';
         this.model_name = model_name;
         this.fruit_name = fruit_name;
 

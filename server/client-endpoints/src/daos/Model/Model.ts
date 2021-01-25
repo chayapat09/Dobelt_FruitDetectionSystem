@@ -1,31 +1,43 @@
+import database from "@daos/db_connector";
 import { IModel } from "@entities/Model";
+import { ObjectID } from "mongodb";
 
 export interface IModelDao {
-    getOne: (id: string) => Promise<IModel | null>;
+    getOne: (_id: string) => Promise<IModel | null>;
     getAll: () => Promise<IModel[]>;
     add: (model: IModel) => Promise<void>;
     update: (model: IModel) => Promise<void>;
     delete: (id: string) => Promise<void>;
 }
 
-class ModelDao implements IModelDao {
 
+// Used exception interupted as if Error on database happen
+
+export class ModelDao implements IModelDao {
+    static collectionName = 'Model';
 
     /**
      * @param _id
      */
-    public getOne(email: string): Promise<IModel | null> {
+    public async getOne(_id: string): Promise<IModel | null> {
         // TODO
-        return Promise.resolve(null);
+        const db = await database.getDb()
+        const collection = db.collection(ModelDao.collectionName);
+        const document = await collection.findOne<IModel>({_id : new ObjectID(_id)});
+        
+        return document;
     }
 
 
     /**
      *
      */
-    public getAll(): Promise<IModel[]> {
-         // TODO
-        return Promise.resolve([]);
+    public async getAll(): Promise<IModel[]> {
+        const db = await database.getDb()
+        const collection = db.collection(ModelDao.collectionName);
+        const cursor = await collection.find<IModel>({});
+        const documents = await cursor.toArray();
+        return Promise.resolve(documents);
     }
 
 
@@ -34,18 +46,25 @@ class ModelDao implements IModelDao {
      * @param model
      */
     public async add(model: IModel): Promise<void> {
-         // TODO
-        return Promise.resolve(undefined);
+        const db = await database.getDb()
+        const collection = db.collection(ModelDao.collectionName);
+        const addDoc : any = {...model};
+        delete addDoc._id;
+
+        const result = await collection.insertOne(addDoc);    
     }
 
 
     /**
      *
-     * @param model
+     * @param model 
      */
     public async update(model: IModel): Promise<void> {
-         // TODO
-        return Promise.resolve(undefined);
+        // TODO
+
+        // const db = await database.getDb()
+        // const collection = db.collection(ModelDao.collectionName);
+        // collection.findOneAndUpdate({_id : model._id} , model)
     }
 
 
@@ -53,10 +72,12 @@ class ModelDao implements IModelDao {
      *
      * @param id
      */
-    public async delete(id: string): Promise<void> {
-         // TODO
-        return Promise.resolve(undefined);
+    public async delete(_id: string): Promise<void> {
+        const db = await database.getDb()
+        const collection = db.collection(ModelDao.collectionName);
+        const result = await collection.deleteOne({_id :new ObjectID(_id)});
+        if (!result.result.ok) throw Error(`Delete Database failed @Model _id : ${_id}`);
     }
 }
-
-export default ModelDao;
+const modelDao = new ModelDao();
+export default modelDao;

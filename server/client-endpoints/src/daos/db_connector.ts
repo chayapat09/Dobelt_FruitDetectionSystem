@@ -18,8 +18,9 @@ class Database {
         return MongoClient.connect(
             Database.url,
             {
-                reconnectInterval : 1000 , 
-                reconnectTries : 30
+                // reconnectInterval : 1000 , 
+                // reconnectTries : 30 , 
+                useUnifiedTopology : true,
             })
             .then((client) => {
                 this.client = client;
@@ -35,7 +36,7 @@ class Database {
                 await this.connect()
             }
             catch (err) {
-                logger.info(`Connecting To database Failed Message :\n ${err.message}`);
+                logger.info(`Failed to Connect with database Error Message :\n ${err.message}`);
             }
         }
 
