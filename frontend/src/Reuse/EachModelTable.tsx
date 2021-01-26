@@ -1,25 +1,31 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 //import {Model} from '../TSEntity/Model';
+import { useHistory } from 'react-router-dom'; 
 
-type ModelProps = {
-    _id: string,
-    model_name: string,
-    fruit_name: string,
-    addDate: string,
-    addedBy: string,
-    description: string
-}
+// type ModelProps = {
+//     _id: string,
+//     model_name: string,
+//     fruit_name: string,
+//     addDate: string,
+//     addedBy: string,
+//     description: string
+// }
 
-const EachModelTable = ({ _id, model_name, fruit_name, addDate, addedBy, description}: ModelProps) => {
+const EachModelTable = (props: any) => {
+
+  let history = useHistory();
+
+  // history.push("/ModelManiputlation");
+
   return (    
         // <h6>Demo model</h6>
         <tr>
-            <td>{model_name}</td>
-            <td>{fruit_name}</td>
-            <td>{addDate}</td>
-            <td>{addedBy}</td>
-            <td>{description}</td>
+            <td>{props.model_name}</td>
+            <td>{props.fruit_name}</td>
+            <td>{props.addDate}</td>
+            <td>{props.addedBy}</td>
+            <td>{props.description}</td>
             <td>
               <div style={{
                  display: 'block',
