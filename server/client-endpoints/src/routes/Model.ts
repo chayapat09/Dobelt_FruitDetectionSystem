@@ -1,5 +1,5 @@
 import { Request, Response, Router } from 'express';
-import { addModel, deleteModel, getModels } from 'src/controller/Model';
+import { addModel, deleteModel, getModels } from '@controller/Model';
 const router = Router();
 
 /******************************************************************************

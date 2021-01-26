@@ -87,6 +87,9 @@
       "@in-memory-data/*" : [
         "src/in-memory-data/*"
       ],
+      "@controller/*" : [
+        "src/controller/*"
+      ],
     },
   },
   "include": [
