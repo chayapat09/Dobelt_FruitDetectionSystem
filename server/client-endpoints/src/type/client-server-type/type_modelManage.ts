@@ -1,17 +1,19 @@
-import { IModel, IModelDetail } from "./type_model";
+import {IModel} from '@entities/Model';
 
-class ModelObject implements IModel , IModelDetail {
+export interface IModelManage {
+    modelDatas : IModel[];
+    selectedModel : string | null ;
+}
+class ModelManageObject {
     static modelApi = '/api/model' // List Model -> GET , Add Model POST
 
-    public model_id : string;
-    public model_name : string ;
-    public fruit_name : string ;
+    public modelDatas : IModel[] ;
+    public selectedModel : string | null ;
 
-    constructor(model_id : string , model_name : string , fruit_name : string ) {
-        this.model_id = model_id;
-        this.model_name = model_name;
-        this.fruit_name = fruit_name;
+    constructor( model : IModel[] , selectedModel : string ) {
+        this.modelDatas = model;
+        this.selectedModel = selectedModel;
     }
-
 }
-export default ModelObject;
+
+export default ModelManageObject;
