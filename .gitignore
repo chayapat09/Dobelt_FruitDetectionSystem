@@ -3,3 +3,4 @@ node_modules/
 dist/
 jet-logger.log
 .eslintcache
+frontend/.eslintcache

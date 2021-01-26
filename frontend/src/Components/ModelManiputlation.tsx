@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Col, Container, Form, Modal, Row, Table } from 'react-bootstrap';
 import EachModelTable from '../Reuse/EachModelTable';
-import { Model } from '../TSEntity/Model';
+import { IModel, Model } from '../TSEntity/Model';
 //import styles from './ModelManipuation.module.scss';
 
+let dataTable: Model[] = [];
+
 //Validation Table
-const ObjA: Model = new Model('Apple1', 'apple', '20/1/2021', 'Bob', 'Our first model', '1');
+const x = new Date()
+const ObjA: Model = new Model('Apple1', 'apple','Alice' ,x , 'Our first model', '1');
+const ObjB: Model = new Model('Orange1', 'orange','Bob' ,x , 'Our second model', '2');
+// dataTable.push(ObjA);
+// dataTable.push(ObjB);
+
+
 
 function ModelManiputlation() {
 
@@ -49,15 +57,30 @@ function ModelManiputlation() {
             <th style={{width: "12.5%"}}>Type of fruit</th>
             <th style={{width: "12.5%"}}>Added by</th>
             <th style={{width: "12.5%"}}>DateTime</th>
-            <th style={{width: "50%"}}>Description</th>
+            <th style={{width: "40%"}}>Description</th>
+            <th style={{width: "10%"}}>Action</th>
           </tr>
         </thead>  
         <tbody>
-          <EachModelTable model_name={ObjA.model_name}
+          <EachModelTable _id = {ObjA._id}
+                          model_name={ObjA.model_name}
                           fruit_name={ObjA.fruit_name}
-                          dateTime={ObjA.dateTime}
+                          addDate={ObjA.addDate === null ? "" : ObjA.addDate.toDateString()}
                           addedBy={ObjA.addedBy}
                           description={ObjA.description}/>
+
+          {dataTable.map((eachObj) => {
+            const {model_name, fruit_name, addDate, addedBy, description} = eachObj;
+            return (<EachModelTable 
+                    _id = {eachObj._id}
+                    model_name={eachObj.model_name}
+                    fruit_name={eachObj.fruit_name}
+                    addDate={eachObj.addDate === null ? "" : eachObj.addDate.toDateString()}
+                    addedBy={eachObj.addedBy}
+                    description={eachObj.description}/>
+            );}
+          )}
+
         </tbody>
       </Table>
       {/* EachModelTable  */}
