@@ -3,8 +3,12 @@ import { Button, Col, Container, Form, Modal, Row, Table } from 'react-bootstrap
 import EachModelTable from '../Reuse/EachModelTable';
 import { IModel, Model } from '../TSEntity/Model';
 //import styles from './ModelManipuation.module.scss';
+import axios from '../Axios/configAxios';
+// import axios from 'axios';
+import { useHistory } from 'react-router-dom';  
 
-let dataTable: Model[] = [];
+
+// let dataTable: Model[] = [];
 
 //Validation Table
 const x = new Date()
@@ -15,22 +19,56 @@ const ObjB: Model = new Model('Orange1', 'orange','Bob' ,x , 'Our second model',
 
 
 
+
 function ModelManiputlation() {
 
-  const postNewModelEndpoints = '168';
+  let history = useHistory();
 
   const [show, setShow] = useState(false);
   const [modelName, setModelName] = useState("");
   const [typeOfFruit, setTypeOfFruit] = useState("");
   const [addedBy, setAddedBy] = useState("");
   const [modelDescription, setModelDescription] = useState("");
+  const [dataTable, setDataTable] = useState<Model[]>([]);
+  const [dummyVar, setDummyVar] = useState(0);
   
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const postNewModel = () => {
+  const postNewModel = () =>{
     console.log(modelName, typeOfFruit, addedBy, modelDescription);
+    const newModel: Model = new Model(modelName ,typeOfFruit ,addedBy ,null ,modelDescription , '');
+
+    axios.post('model', newModel)
+    .then(res =>{
+        console.log(res.data);
+        handleClose();
+        setDummyVar(dummyVar+1);
+    })
+    .catch(err =>{
+        console.log(err);
+    });
+
+    // history.push("/Summary");
+    // history.push("/ModelManiputlation");
+
   }
+
+  const getModel = () =>{
+    axios.get('model').
+    then(res =>{
+      console.log(res.data);
+      setDataTable(res.data);
+    }).
+    catch(err =>{
+      console.log(err);
+    });
+  }
+
+  useEffect(() =>{
+    getModel();
+  }, [dummyVar]);
+
 
   return (
     <Container fluid>
@@ -62,12 +100,12 @@ function ModelManiputlation() {
           </tr>
         </thead>  
         <tbody>
-          <EachModelTable _id = {ObjA._id}
+          {/* <EachModelTable _id = {ObjA._id}
                           model_name={ObjA.model_name}
                           fruit_name={ObjA.fruit_name}
-                          addDate={ObjA.addDate === null ? "" : ObjA.addDate.toDateString()}
+                          addDate={ObjA.addDate === null ? "" : ObjA.addDate}
                           addedBy={ObjA.addedBy}
-                          description={ObjA.description}/>
+                          description={ObjA.description}/> */}
 
           {dataTable.map((eachObj) => {
             const {model_name, fruit_name, addDate, addedBy, description} = eachObj;
@@ -75,7 +113,7 @@ function ModelManiputlation() {
                     _id = {eachObj._id}
                     model_name={eachObj.model_name}
                     fruit_name={eachObj.fruit_name}
-                    addDate={eachObj.addDate === null ? "" : eachObj.addDate.toDateString()}
+                    addDate={eachObj.addDate === null ? "" : eachObj.addDate}
                     addedBy={eachObj.addedBy}
                     description={eachObj.description}/>
             );}
