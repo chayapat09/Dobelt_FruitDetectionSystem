@@ -1,6 +1,5 @@
 import { ModelDao } from '@daos/Model/Model';
 import { IModel } from '@entities/Model';
-import {Request , Response} from 'express';
 
 const modelDao = new ModelDao();
 export async function getModels() : Promise<IModel[]> {
