@@ -31,7 +31,7 @@ export class LogDao implements ILogDao {
         const document = await collection.findOne<ILog>({
             _id : new ObjectID(_id)
         })
-
+        
         return document;
     }
 

@@ -10,7 +10,7 @@ export async function getModels() : Promise<IModel[]> {
 }
 
 export async function addModel(model : IModel) : Promise<void> {
-
+    model.addDate = new Date();
     await modelDao.add(model);
     
 }
