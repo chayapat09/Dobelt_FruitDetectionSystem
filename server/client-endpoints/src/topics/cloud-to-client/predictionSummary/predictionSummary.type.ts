@@ -1,4 +1,4 @@
-import {IModel} from './type_model'
+//import {IModel} from '../../../type/client-server-type/type_model'
 
 export interface ISummary {
     //model_id : string ;
@@ -8,7 +8,7 @@ export interface ISummary {
 
 }
 
-class Summary implements ISummary,IModel {
+class PredictionSummary implements ISummary { // implements imodelToo
     static socketIO_topic = 'predictionSummary'
     
     public model_id : string;
@@ -27,6 +27,6 @@ class Summary implements ISummary,IModel {
     }
 }
 
-export default Summary;
+export default PredictionSummary;
 
 // Server -> Client via Socket.IO

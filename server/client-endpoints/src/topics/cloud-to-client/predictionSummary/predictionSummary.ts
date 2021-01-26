@@ -1,9 +1,9 @@
-import Summary from 'src/type/client-server-type/type_summary';
+import PredictionSummary from './predictionSummary.type';
 import sendToSocketsClient from '../sendTo';
 import {Socket} from 'socket.io';
 
 // Do logic about send to specified socket 
-function send_predictionSummary(sockets : Socket[] , predictionSummary : Summary) {
+function send_predictionSummary(sockets : Socket[] , predictionSummary : PredictionSummary) {
     sendToSocketsClient(sockets ,Topic.RobotStateTopic , predictionSummary);
 }
 

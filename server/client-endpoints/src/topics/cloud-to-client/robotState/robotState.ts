@@ -1,4 +1,4 @@
-import RobotState from 'src/type/client-server-type/type_state';
+import RobotState from './robotState.type';
 import sendToSocketsClient from '../sendTo';
 import {Socket} from 'socket.io';
 // Do logic about send to specified socket 
