@@ -1,32 +1,32 @@
 export interface IModel {
-    id : string ;
+    _id : string ;
     model_name : string ;
     fruit_name : string ;
-    dateTime: string;
+    addDate: Date | null;
     addedBy: string;
     description: string;
 }
 
 class Model implements IModel {
 
-    public id : string ;
+    public _id : string ;
     public model_name : string ;
     public fruit_name : string ;
-    public dateTime : string ;
+    public addDate : Date | null ;
     public addedBy : string ;
     public description : string ;
 
     constructor(model_name : string ,
                 fruit_name : string ,
-                dateTime : string ,
                 addedBy : string ,
+                addDate : Date | null ,
                 description : string ,
-                 id? : string  ) {
+                 _id? : string  ) {
 
-        this.id = id || '';
+        this._id = _id || '';
         this.model_name  = model_name;
         this.fruit_name  = fruit_name;
-        this.dateTime    = dateTime;
+        this.addDate    = addDate;
         this.addedBy     = addedBy;
         this.description = description;
 
