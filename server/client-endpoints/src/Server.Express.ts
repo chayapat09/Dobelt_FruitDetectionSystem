@@ -13,11 +13,15 @@ import logger from '@shared/Logger';
 const app = express();
 const { BAD_REQUEST } = StatusCodes;
 
-
+const cors = require('cors');
 
 /************************************************************************************
  *                              Set basic express settings
  ***********************************************************************************/
+
+if (process.env.NODE_ENV === 'development') {
+    app.use(cors({credentials : true , origin : true}));
+}
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
