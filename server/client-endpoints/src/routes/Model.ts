@@ -5,7 +5,6 @@ const router = Router();
 /******************************************************************************
  *                      Get All Model - "GET /api/model"
  ******************************************************************************/
-
 router.get('/' , async ( req : Request , res : Response ) => {
     const models = await getModels();
     res.json(models);
@@ -34,7 +33,7 @@ router.post('/' , async(req : Request , res : Response ) => {
 
 
 /******************************************************************************
- *                       Delete One Model - "Delete /api/model"
+ *                       Delete One Model - "DELETE /api/model"
  ******************************************************************************/
 router.delete('/' , async (req : Request , res : Response ) => {
     await deleteModel(req.body._id);
@@ -43,6 +42,12 @@ router.delete('/' , async (req : Request , res : Response ) => {
 
 
 
+/******************************************************************************
+ *                       Select One Model - "POST /api/model/select"
+ ******************************************************************************/
+router.post('/select' , async (req : Request , res : Response) => {
 
+    res.json('ok');
+})
 
 export default router;

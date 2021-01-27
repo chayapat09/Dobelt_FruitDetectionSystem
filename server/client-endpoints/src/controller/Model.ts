@@ -37,4 +37,10 @@ export async function deleteModel(_id : string) :Promise<void> {
     await modelDao.delete(_id);
 
 }
+
+export async function selectModel(_id : string) : Promise<void> {
+
+    modelSelection.setModel(_id);
+
+}
 // TODO - type validation !!
