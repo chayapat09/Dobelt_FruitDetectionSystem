@@ -1,5 +1,5 @@
 import { Request, Response, Router } from 'express';
-import { addModel, deleteModel, getModels } from '@controller/Model';
+import { addModel, deleteModel, getModels, updateModel } from '@controller/Model';
 const router = Router();
 
 /******************************************************************************
@@ -18,6 +18,16 @@ router.get('/' , async ( req : Request , res : Response ) => {
  ******************************************************************************/
 router.post('/' , async(req : Request , res : Response ) => {
     await addModel(req.body);
+    res.json({ok : true});
+});
+
+
+
+/******************************************************************************
+ *                       Update One Model - "PUT /api/model"
+ ******************************************************************************/
+router.post('/' , async(req : Request , res : Response ) => {
+    await updateModel(req.body);
     res.json({ok : true});
 });
 

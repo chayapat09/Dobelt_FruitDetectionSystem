@@ -62,9 +62,12 @@ export class ModelDao implements IModelDao {
     public async update(model: IModel): Promise<void> {
         // TODO
 
-        // const db = await database.getDb()
-        // const collection = db.collection(ModelDao.collectionName);
-        // collection.findOneAndUpdate({_id : model._id} , model)
+        const db = await database.getDb()
+        const collection = db.collection(ModelDao.collectionName);
+        const updateDoc : any = {...model};
+        delete updateDoc._id;
+        
+        collection.findOneAndUpdate({_id : model._id} , updateDoc)
     }
 
 
