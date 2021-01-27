@@ -5,7 +5,7 @@ import { IModel, Model } from '../TSEntity/Model';
 //import styles from './ModelManipuation.module.scss';
 import axios from '../Axios/configAxios';
 // import axios from 'axios';
-import { useHistory } from 'react-router-dom';  
+// import { useHistory } from 'react-router-dom';  
 
 
 // let dataTable: Model[] = [];
@@ -21,8 +21,6 @@ const ObjB: Model = new Model('Orange1', 'orange','Bob' ,x , 'Our second model',
 
 
 function ModelManiputlation() {
-
-  let history = useHistory();
 
   const [show, setShow] = useState(false);
   const [modelName, setModelName] = useState("");
@@ -115,7 +113,9 @@ function ModelManiputlation() {
                     fruit_name={eachObj.fruit_name}
                     addDate={eachObj.addDate === null ? "" : eachObj.addDate}
                     addedBy={eachObj.addedBy}
-                    description={eachObj.description}/>
+                    description={eachObj.description}
+                    // dummyVar={[dummyVar, setDummyVar]}
+                    />
             );}
           )}
 

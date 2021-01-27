@@ -1,7 +1,9 @@
+import axios from 'axios';
 import React from 'react';
 import { Button } from 'react-bootstrap';
+import { IModel, Model } from '../TSEntity/Model';
 //import {Model} from '../TSEntity/Model';
-import { useHistory } from 'react-router-dom'; 
+// import { useHistory } from 'react-router-dom'; 
 
 // type ModelProps = {
 //     _id: string,
@@ -14,9 +16,24 @@ import { useHistory } from 'react-router-dom';
 
 const EachModelTable = (props: any) => {
 
-  let history = useHistory();
+  // const reRender = () => {
+  //   props.dummyVar.setDu
+  // }
 
-  // history.push("/ModelManiputlation");
+  // const deleteModel = () => {
+
+  //   const deleteObj: Model = new Model('' ,'' ,'' ,null ,'' ,'');
+
+  //   axios.delete('model', deleteObj)
+  //   .then(res =>{
+  //     console.log(res.data);
+  //     // setDummyVar(dummyVar+1);
+  //   })
+  //   .catch(err =>{
+  //     console.log(err);
+  //   }); 
+
+  // }
 
   return (    
         // <h6>Demo model</h6>
