@@ -1,5 +1,5 @@
 import { Request, Response, Router } from 'express';
-import { addModel, deleteModel, getModels, updateModel } from '@controller/Model';
+import { addModel, deleteModel, getModels, selectModel, updateModel } from '@controller/Model';
 const router = Router();
 
 /******************************************************************************
@@ -46,7 +46,7 @@ router.delete('/' , async (req : Request , res : Response ) => {
  *                       Select One Model - "POST /api/model/select"
  ******************************************************************************/
 router.post('/select' , async (req : Request , res : Response) => {
-
+    selectModel(req.body._id);
     res.json('ok');
 })
 
