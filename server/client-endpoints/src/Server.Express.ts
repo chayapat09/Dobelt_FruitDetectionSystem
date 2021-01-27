@@ -8,6 +8,7 @@ import StatusCodes from 'http-status-codes';
 import 'express-async-errors';
 
 import BaseRouter from './routes';
+import EdgeRouter from './routes/edge'
 import logger from '@shared/Logger';
 
 const app = express();
@@ -39,6 +40,7 @@ if (process.env.NODE_ENV === 'production') {
 
 // Add APIs
 app.use('/api', BaseRouter);
+// app.use('/edge' , EdgeRouter);
 
 // Print API errors
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -55,6 +57,13 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
  *                              Serve front-end content
  ***********************************************************************************/
 
+//app.use(express.static(path.join(__dirname,'../../../','frontend','build')));
+
+//app.use(express.static('build'));
+
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname,'../../../','frontend','build','index.html'));
+// });
 const viewsDir = path.join(__dirname, 'views');
 app.set('views', viewsDir);
 const staticDir = path.join(__dirname, 'public');

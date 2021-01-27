@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/Components/NavbarPage.module.scss"],"names":[],"mappings":"AAAA,wBACI,SAAA,CAIA,+CACI,iBAAA","file":"main.af221f21.chunk.css","sourcesContent":[".logo {\r\n    color: red;\r\n}\r\n\r\n.navbar {\r\n    .a {\r\n        margin-right: 10px;\r\n    }\r\n}"]}
