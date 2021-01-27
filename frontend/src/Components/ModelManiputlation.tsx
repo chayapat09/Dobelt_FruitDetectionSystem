@@ -29,6 +29,7 @@ function ModelManiputlation() {
   const [modelDescription, setModelDescription] = useState("");
   const [dataTable, setDataTable] = useState<Model[]>([]);
   const [dummyVar, setDummyVar] = useState(0);
+  const [selectedModel, setSelectedModel] = useState("");
   
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -56,7 +57,8 @@ function ModelManiputlation() {
     axios.get('model').
     then(res =>{
       console.log(res.data);
-      setDataTable(res.data);
+      setDataTable(res.data.modelDatas);
+      setSelectedModel(res.data.selectedModel);
     }).
     catch(err =>{
       console.log(err);
@@ -114,7 +116,8 @@ function ModelManiputlation() {
                     addDate={eachObj.addDate === null ? "" : eachObj.addDate}
                     addedBy={eachObj.addedBy}
                     description={eachObj.description}
-                    // dummyVar={[dummyVar, setDummyVar]}
+                    selected={ eachObj._id===selectedModel ? true: false }
+                    reRenderByDummy={[dummyVar, setDummyVar]}
                     />
             );}
           )}

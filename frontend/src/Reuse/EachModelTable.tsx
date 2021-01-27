@@ -1,8 +1,7 @@
-import axios from 'axios';
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import { IModel, Model } from '../TSEntity/Model';
-//import {Model} from '../TSEntity/Model';
+import axios from '../Axios/configAxios'
 // import { useHistory } from 'react-router-dom'; 
 
 // type ModelProps = {
@@ -16,24 +15,38 @@ import { IModel, Model } from '../TSEntity/Model';
 
 const EachModelTable = (props: any) => {
 
-  // const reRender = () => {
-  //   props.dummyVar.setDu
-  // }
+  const selectAndDeleteObj: Model = new Model('' ,'' ,'' ,null ,'' , props._id);
 
-  // const deleteModel = () => {
+  const reRender = () => {
+    var dummyVar: number = props.reRenderByDummy[0];
+    props.reRenderByDummy[1](dummyVar+1);
+  }
 
-  //   const deleteObj: Model = new Model('' ,'' ,'' ,null ,'' ,'');
+  const deleteModel = () => {
+    console.log('delete' + props._id);
+    axios.delete('model', {
+      data: selectAndDeleteObj
+    })
+    .then(res =>{
+      console.log(res.data);
+      reRender();
+    })
+    .catch(err =>{
+      console.log(err);
+    }); 
+  }
 
-  //   axios.delete('model', deleteObj)
-  //   .then(res =>{
-  //     console.log(res.data);
-  //     // setDummyVar(dummyVar+1);
-  //   })
-  //   .catch(err =>{
-  //     console.log(err);
-  //   }); 
-
-  // }
+  const updateModel = () => {
+    console.log('update' + props._id);
+    axios.put('model', selectAndDeleteObj)
+    .then(res =>{
+      console.log(res.data);
+      reRender();
+    })
+    .catch(err =>{
+      console.log(err);
+    }); 
+  }
 
   return (    
         // <h6>Demo model</h6>
@@ -52,12 +65,21 @@ const EachModelTable = (props: any) => {
                   marginTop: 2,
                   marginBottom: 2,
                   marginRight: 5, 
-                }}>delete</Button>
+                }} onClick={deleteModel} >delete</Button>
+                { props.selected ? 
                 <Button variant="warning" style={{
                   marginTop: 2,
                   marginBottom: 2,
                   marginLeft: 1
-                }}>select</Button>{' '}
+                }} onClick={updateModel}>select</Button>
+                :
+                <Button variant="outline-warning" style={{
+                  marginTop: 2,
+                  marginBottom: 2,
+                  marginLeft: 1
+                }} onClick={updateModel}>select</Button>
+                }
+                {' '}
               </div>
             </td>
         </tr>
