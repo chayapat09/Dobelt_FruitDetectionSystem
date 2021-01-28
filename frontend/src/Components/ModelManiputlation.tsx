@@ -105,7 +105,10 @@ function ModelManiputlation() {
                           fruit_name={ObjA.fruit_name}
                           addDate={ObjA.addDate === null ? "" : ObjA.addDate}
                           addedBy={ObjA.addedBy}
-                          description={ObjA.description}/> */}
+                          description={ObjA.description}/>
+                          selected={ ObjA._id===selectedModel ? true: false }
+                          reRenderByDummy={[dummyVar, setDummyVar]}
+                          /> */}
 
           {dataTable.map((eachObj) => {
             const {model_name, fruit_name, addDate, addedBy, description} = eachObj;
