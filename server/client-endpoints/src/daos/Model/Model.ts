@@ -66,8 +66,11 @@ export class ModelDao implements IModelDao {
         const collection = db.collection(ModelDao.collectionName);
         const updateDoc : any = {...model};
         delete updateDoc._id;
-        
-        collection.findOneAndUpdate({_id : model._id} , updateDoc)
+        if (typeof model._id !== 'string') throw Error('_id fields required');
+        await collection.findOneAndUpdate({_id : new ObjectID(model._id)} , {
+            '$set' : updateDoc
+        })
+
     }
 
 
