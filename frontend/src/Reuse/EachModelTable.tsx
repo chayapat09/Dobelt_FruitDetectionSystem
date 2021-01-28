@@ -38,7 +38,7 @@ const EachModelTable = (props: any) => {
 
   const updateModel = () => {
     console.log('update' + props._id);
-    axios.put('model', selectAndDeleteObj)
+    axios.post('model/select', selectAndDeleteObj)
     .then(res =>{
       console.log(res.data);
       reRender();
@@ -46,6 +46,10 @@ const EachModelTable = (props: any) => {
     .catch(err =>{
       console.log(err);
     }); 
+  }
+
+  const editModel = () => {
+    // editedModel = new Model()
   }
 
   return (    
@@ -61,6 +65,11 @@ const EachModelTable = (props: any) => {
                  display: 'block',
                  margin: 'auto'
               }}>
+                <Button variant="primary" style={{
+                  marginTop: 2,
+                  marginBottom: 2,
+                  marginRight: 5, 
+                }} onClick={editModel} >delete</Button>
                 <Button variant="danger" style={{
                   marginTop: 2,
                   marginBottom: 2,
