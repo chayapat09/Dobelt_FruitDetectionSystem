@@ -7,6 +7,7 @@ import mockData from './Model.mock';
 mockData();
 
 const modelDao = new ModelDao();
+
 export async function getModels() : Promise<IModelManage> {
 
     const models = await modelDao.getAll();
@@ -27,9 +28,19 @@ export async function addModel(model : IModel) : Promise<void> {
     
 }
 
+export async function updateModel(model : IModel) : Promise<void> {
+    await modelDao.update(model);
+}
+
 export async function deleteModel(_id : string) :Promise<void> {
 
     await modelDao.delete(_id);
+
+}
+
+export async function selectModel(_id : string) : Promise<void> {
+
+    modelSelection.setModel(_id);
 
 }
 // TODO - type validation !!
