@@ -95,8 +95,8 @@ function ModelManiputlation() {
             <th style={{width: "12.5%"}}>Type of fruit</th>
             <th style={{width: "12.5%"}}>Added by</th>
             <th style={{width: "12.5%"}}>DateTime</th>
-            <th style={{width: "40%"}}>Description</th>
-            <th style={{width: "10%"}}>Action</th>
+            <th style={{width: "37.5%"}}>Description</th>
+            <th style={{width: "12.5%"}}>Action</th>
           </tr>
         </thead>  
         <tbody>
