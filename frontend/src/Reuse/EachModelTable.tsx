@@ -1,5 +1,5 @@
-import React from 'react';
-import { Button } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Button, Form, Modal } from 'react-bootstrap';
 import { IModel, Model } from '../TSEntity/Model';
 import axios from '../Axios/configAxios'
 // import { useHistory } from 'react-router-dom'; 
@@ -14,6 +14,15 @@ import axios from '../Axios/configAxios'
 // }
 
 const EachModelTable = (props: any) => {
+
+  const [show, setShow] = useState(false);
+  const [editedModelName, setEditedModelName] = useState(props.model_name);
+  const [editedTypeOfFruit, setEditedTypeOfFruit] = useState(props.fruit_name);
+  const [editedAddedBy, setEditedAddedBy] = useState(props.addedBy);
+  const [editedModelDescription, setEditedModelDescription] = useState(props.description);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const selectAndDeleteObj: Model = new Model('' ,'' ,'' ,null ,'' , props._id);
 
@@ -48,8 +57,32 @@ const EachModelTable = (props: any) => {
     }); 
   }
 
-  const editModel = () => {
-    // editedModel = new Model()
+  // const checkEditedField = (newVal: string, oldVal: string) : string => {
+  //   return newVal==="" ? oldVal : newVal;
+  // }
+
+  const editModel = () => {;
+    const editedModel: Model = new Model(
+      editedModelName,
+      editedTypeOfFruit,
+      editedAddedBy,
+      null,
+      editedModelDescription,
+      props._id
+    )
+
+    console.log(editedModelDescription, props.description);
+    console.log(editModel);
+    axios.put('model', editedModel)
+    .then(res =>{
+      console.log(res.data);
+      handleClose();
+      reRender();
+    })
+    .catch(err =>{
+      console.log(err);
+    }); 
+
   }
 
   return (    
@@ -69,7 +102,7 @@ const EachModelTable = (props: any) => {
                   marginTop: 2,
                   marginBottom: 2,
                   marginRight: 5, 
-                }} onClick={editModel} >delete</Button>
+                }} onClick={handleShow} >Edit</Button>
                 <Button variant="danger" style={{
                   marginTop: 2,
                   marginBottom: 2,
@@ -91,7 +124,60 @@ const EachModelTable = (props: any) => {
                 {' '}
               </div>
             </td>
+
+            {/* Modal tag */}
+            <Modal
+            size="lg"
+            show={show}
+            onHide={handleClose}
+            backdrop="static"
+            keyboard={false}
+            aria-labelledby="example-modal-sizes-title-lg"
+            >
+            <Modal.Header closeButton>
+              <Modal.Title id="example-modal-sizes-title-lg">
+                Edit model
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+
+              {/* Form Control */}
+              <Form>
+
+                <Form.Group controlId="formModelName">
+                  <Form.Label>model name</Form.Label>
+                  <Form.Control type="text" value={editedModelName} onChange={(e)=>setEditedModelName(e.target.value)}/>
+                </Form.Group>
+
+                <Form.Group controlId="formTypeOfFruit">
+                  <Form.Label>Type of fruit</Form.Label>
+                  <Form.Control type="text" value={editedTypeOfFruit} onChange={(e)=>setEditedTypeOfFruit(e.target.value)}/>
+                </Form.Group>
+
+                <Form.Group controlId="formAddedBy">
+                  <Form.Label>Added by</Form.Label>
+                  <Form.Control type="text" value={editedAddedBy} onChange={(e)=>setEditedAddedBy(e.target.value)}/>
+                </Form.Group>
+
+                <Form.Group controlId="exampleForm.ControlModelDescription">
+                  <Form.Label>Model Description</Form.Label>
+                  <Form.Control as="textarea" rows={3} value={editedModelDescription} onChange={(e)=>setEditedModelDescription(e.target.value)}/>
+                </Form.Group>
+
+              </Form>
+
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                  Close
+                </Button>
+                <Button variant="primary" onClick={editModel}>Submit</Button>
+              </Modal.Footer>
+              </Modal>
         </tr>
+
+        //Modal tag
+
     
   );
 }
