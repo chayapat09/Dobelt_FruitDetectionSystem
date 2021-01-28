@@ -38,7 +38,7 @@ const EachModelTable = (props: any) => {
 
   const updateModel = () => {
     console.log('update' + props._id);
-    axios.post('mode/select', selectAndDeleteObj)
+    axios.post('model/select', selectAndDeleteObj)
     .then(res =>{
       console.log(res.data);
       reRender();
