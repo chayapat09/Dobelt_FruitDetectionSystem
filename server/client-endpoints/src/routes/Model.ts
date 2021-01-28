@@ -25,7 +25,7 @@ router.post('/' , async(req : Request , res : Response ) => {
 /******************************************************************************
  *                       Update One Model - "PUT /api/model"
  ******************************************************************************/
-router.post('/' , async(req : Request , res : Response ) => {
+router.put('/' , async(req : Request , res : Response ) => {
     await updateModel(req.body);
     res.json({ok : true});
 });
