@@ -15,7 +15,7 @@ sh rundev.sh
 
 or can be run using single command
 ```
-curl -o start-dev-dobelt-cloud.sh https://raw.githubusercontent.com/chayapat09/Dobelt_FruitDetectionSystem/master/run-script/rundev.sh && sh start-dev-dobelt-cloud.sh.sh
+curl -o start-dev-dobelt-cloud.sh https://raw.githubusercontent.com/chayapat09/Dobelt_FruitDetectionSystem/master/run-script/rundev.sh && sh start-dev-dobelt-cloud.sh
 ```
 
 Production server can be run by
@@ -28,7 +28,7 @@ sh run.sh
 
 or can be run using single command
 ```
-curl -o start-dobelt-cloud.sh.sh https://raw.githubusercontent.com/chayapat09/Dobelt_FruitDetectionSystem/master/run-script/run.sh && sh start-dobelt-cloud.sh.sh
+curl -o start-dobelt-cloud.sh.sh https://raw.githubusercontent.com/chayapat09/Dobelt_FruitDetectionSystem/master/run-script/run.sh && sh start-dobelt-cloud.sh
 ```
 # Note : 
 - start server again in old folder only step 3 is required
