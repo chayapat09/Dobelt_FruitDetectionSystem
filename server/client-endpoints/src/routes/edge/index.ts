@@ -1,8 +1,11 @@
 import { Router } from "express";
+import detectionRouter from './Detection.Mock';
+import robotStateRouter from './RobotState.Mock';
 
 const router = Router();
 
-router.use('/detection' , )
+router.use('/detection' , detectionRouter);
+router.use('/state' , robotStateRouter);
 
 export default router;
 

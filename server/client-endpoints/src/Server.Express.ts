@@ -40,7 +40,7 @@ if (process.env.NODE_ENV === 'production') {
 
 // Add APIs
 app.use('/api', BaseRouter);
-// app.use('/edge' , EdgeRouter);
+app.use('/edge' , EdgeRouter);
 
 // Print API errors
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

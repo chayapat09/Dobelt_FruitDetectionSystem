@@ -9,8 +9,9 @@ const router = Router();
 
 router.post('/' , (req : Request , res : Response) => {
     const predictionResult : number = req.body.result;
+    const modelId : string = req.body.model_id;
 
-    detection(predictionResult , '');
+    detection(predictionResult , modelId);
     
     res.json({ok : true});
 })

@@ -8,14 +8,23 @@ export interface ILogQuery {
     model_id : string ;
 }
 
+export interface SummaryResult {
+    detected : number;
+    defected : number;
+    normal : number;
+}
+
 export interface ILogDao {
     getOne: (email: string) => Promise<ILog | null>;
     getAll: () => Promise<ILog[]>;
+    getSummary : (model_id : string) => Promise<SummaryResult>;
     query : (query : ILogQuery) => Promise<ILog[]>;
     add: (user: ILog) => Promise<void>;
     // update: (user: IUser) => Promise<void>;
     delete: (id: string) => Promise<void>;
 }
+
+// export interface
 
 export class LogDao implements ILogDao {
 
@@ -33,6 +42,33 @@ export class LogDao implements ILogDao {
         })
         
         return document;
+    }
+
+    /**
+     * @param model_id
+     * Mockup db aggregation not yet efficient
+     * TODO : Test function
+     */
+    public async getSummary(model_id : string) : Promise<SummaryResult> {
+        const db = await database.getDb();
+        const collection = db.collection(LogDao.collectionName);
+        const documents = await collection.find<ILog>({
+            model_id : new ObjectID(model_id)
+        }).toArray();
+        
+        const summaryResult : SummaryResult = {
+            detected : 0 , 
+            defected : 0 , 
+            normal : 0 ,
+        }
+
+        documents.forEach(log => {
+            summaryResult.detected++;
+            if (log.result === Log.RESULT_NORMAL) summaryResult.normal++;
+            if (log.result === Log.RESULT_DEFECTED) summaryResult.defected++;
+        });
+
+        return summaryResult;
     }
 
 

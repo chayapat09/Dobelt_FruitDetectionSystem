@@ -1,4 +1,0 @@
-created Automated build scripts
-
-change Hirachy Model to Routes -> [cloud-to-edge , edge-to-cloud , cloud-to-client , client-to-cloud] -> [RestApi , WebSocket]
-= 1 * 4 * 2 Permurations

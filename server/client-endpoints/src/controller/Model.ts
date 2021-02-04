@@ -1,8 +1,14 @@
 import { ModelDao } from '@daos/Model/Model';
 import { IModel } from '@entities/Model';
 import { IModelManage } from 'src/type/client-server-type/type_modelManage';
-import modelSelection from '@in-memory-data/selected-model';
+import modelSelection from '@in-memory-data/selectedModel';
 import mockData from './Model.mock';
+import { Socket } from 'socket.io';
+import modelSocket from '@in-memory-data/model-socket';
+
+/******************************************************************************
+ *                       Model - RestAPI
+ ******************************************************************************/
 
 mockData();
 
@@ -44,3 +50,21 @@ export async function selectModel(_id : string) : Promise<void> {
 
 }
 // TODO - type validation !!
+
+
+/******************************************************************************
+ *                       Model(Subscription) - SocketIO
+ ******************************************************************************/
+
+ export async function modelFeedSubscription(socket : Socket , model_id : string) : Promise<void> {
+    modelSocket.setModel(socket , model_id);
+ }
+
+ // TODO : First Subscribe Message ?? 
+ // Need to find somewhere to store lastMessage for each topic
+ // And use that class to sendMessage to eachTopic instead of emit function 
+ // called in topics/*/**.ts
+ // 2 functionalties
+ // 1. emitted message
+ // 2. stored history message for each topics
+ // 3. function getMessage(socket , topic) will send last message for that topic to specified socket

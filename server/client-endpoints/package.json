@@ -26,7 +26,8 @@
     "@serverSocketIO": "dist/Server.SocketIO",
     "@config": "dist/config",
     "@in-memory-data": "dist/in-memory-data",
-    "@controller": "dist/controller"
+    "@controller": "dist/controller" ,
+    "@topics": "dist/topics"
   },
   "eslintConfig": {
     "parser": "@typescript-eslint/parser",

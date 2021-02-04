@@ -22,7 +22,6 @@ export class Log implements ILog,IValidable {
         this.timestamp = timestamp;
         this.result = result;
         this.validate();
-
     }
 
     public validate() {

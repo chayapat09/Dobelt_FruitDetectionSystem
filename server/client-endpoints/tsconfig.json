@@ -90,6 +90,9 @@
       "@controller/*" : [
         "src/controller/*"
       ],
+      "@topics/*" : [
+        "src/topics/*"
+      ],
     },
   },
   "include": [

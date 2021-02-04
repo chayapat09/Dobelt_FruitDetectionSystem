@@ -8,7 +8,7 @@ const router = Router();
 // }
 
 router.post('/' , async (req : Request , res : Response) => {
-    const state : number = req.body.robotState;
+    const state : number = req.body.state;
     robotState(state);
     res.json({ok : true});
 })
