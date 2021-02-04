@@ -13,7 +13,7 @@ Development server can be run by
 sh rundev.sh
 ```
 
-or can be run using single command
+or can be run using single command sh file will automatically downloaded
 ```
 curl -o start-dev-dobelt-cloud.sh https://raw.githubusercontent.com/chayapat09/Dobelt_FruitDetectionSystem/master/run-script/rundev.sh && sh start-dev-dobelt-cloud.sh
 ```
@@ -26,7 +26,7 @@ Production server can be run by
 sh run.sh
 ```
 
-or can be run using single command
+or can be run using single command sh file will automatically downloaded
 ```
 curl -o start-dobelt-cloud.sh.sh https://raw.githubusercontent.com/chayapat09/Dobelt_FruitDetectionSystem/master/run-script/run.sh && sh start-dobelt-cloud.sh
 ```
