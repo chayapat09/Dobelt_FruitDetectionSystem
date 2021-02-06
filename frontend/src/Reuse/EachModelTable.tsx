@@ -61,12 +61,12 @@ const EachModelTable = (props: any) => {
   //   return newVal==="" ? oldVal : newVal;
   // }
 
-  const editModel = () => {;
+  const editModel = () => {
     const editedModel: Model = new Model(
       editedModelName,
       editedTypeOfFruit,
       editedAddedBy,
-      null,
+      props.addDate,
       editedModelDescription,
       props._id
     )
@@ -90,8 +90,8 @@ const EachModelTable = (props: any) => {
         <tr>
             <td>{props.model_name}</td>
             <td>{props.fruit_name}</td>
-            <td>{props.addDate}</td>
             <td>{props.addedBy}</td>
+            <td>{props.addDate}</td>
             <td>{props.description}</td>
             <td>
               <div style={{
@@ -107,19 +107,19 @@ const EachModelTable = (props: any) => {
                   marginTop: 2,
                   marginBottom: 2,
                   marginRight: 5, 
-                }} onClick={deleteModel} >delete</Button>
+                }} onClick={deleteModel} >Delete</Button>
                 { props.selected ? 
                 <Button variant="warning" style={{
                   marginTop: 2,
                   marginBottom: 2,
                   marginLeft: 1
-                }} onClick={updateModel}>select</Button>
+                }} onClick={updateModel}>Select</Button>
                 :
                 <Button variant="outline-warning" style={{
                   marginTop: 2,
                   marginBottom: 2,
                   marginLeft: 1
-                }} onClick={updateModel}>select</Button>
+                }} onClick={updateModel}>Select</Button>
                 }
                 {' '}
               </div>
