@@ -2,6 +2,7 @@ import { cors_allow_origin } from '@config/socketIO_config';
 import connectedSocket from '@in-memory-data/connectedSocket';
 import modelSocket from '@in-memory-data/model-socket';
 import logger from '@shared/Logger';
+import setModel from '@topics/client-to-cloud/setModel/setModel';
 import SocketIO , {Socket} from 'socket.io';
 //import modelSocket from '@in-memory-data/model-socket';
 
@@ -36,6 +37,10 @@ io.on('connection' , (socket : Socket) => {
     });
 
     // on reconnection ?
+
+
+    // Event Handler
+    socket.on('setModel' , setModel);
 
 })
 
