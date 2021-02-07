@@ -40,7 +40,9 @@ io.on('connection' , (socket : Socket) => {
 
 
     // Event Handler
-    socket.on('setModel' , setModel);
+    socket.on('setModel' , (data , callback) => {
+        setModel(socket , data , callback);
+    });
 
 })
 
