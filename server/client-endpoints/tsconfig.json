@@ -93,6 +93,9 @@
       "@topics/*" : [
         "src/topics/*"
       ],
+      "@type/*" : [
+        "src/type/*"
+      ],
     },
   },
   "include": [

@@ -27,7 +27,8 @@
     "@config": "dist/config",
     "@in-memory-data": "dist/in-memory-data",
     "@controller": "dist/controller" ,
-    "@topics": "dist/topics"
+    "@topics": "dist/topics" ,
+    "@type": "dist/topics"
   },
   "eslintConfig": {
     "parser": "@typescript-eslint/parser",

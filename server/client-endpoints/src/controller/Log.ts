@@ -2,7 +2,7 @@ import logDao, { ILogQuery } from "@daos/Log/Log"
 import modelDao from "@daos/Model/Model";
 import { ILog } from "@entities/Log";
 import { IModel } from "@entities/Model";
-import LoggingQueryResult from "src/type/client-server-type/type_logging";
+import {LoggingQueryResult} from "src/type/client-server-type/type_logging";
 
 export const getLog = async (filter : number , model_id : string ) : Promise<LoggingQueryResult> => {
     const query : ILogQuery = {

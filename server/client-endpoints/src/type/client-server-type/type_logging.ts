@@ -8,8 +8,7 @@ export interface ILogging {
 
 export interface ILog {
     //name : string ;
-    timestamp : Date ;
-    //Timestamp should be string ----------------------------------------------------------
+    timestamp : string | Date ; // it will automatically converted
     result : number ;
 }
 

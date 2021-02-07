@@ -47,7 +47,6 @@ export class LogDao implements ILogDao {
     /**
      * @param model_id
      * Mockup db aggregation not yet efficient
-     * TODO : Test function
      */
     public async getSummary(model_id : string) : Promise<SummaryResult> {
         const db = await database.getDb();
