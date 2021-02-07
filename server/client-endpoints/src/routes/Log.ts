@@ -1,6 +1,6 @@
 import { getLog } from '@controller/Log';
+import { LoggingQueryResult } from '@type/client-server-type/type_logging';
 import { Request, Response, Router } from 'express';
-import LoggingQueryResult from 'src/type/client-server-type/type_logging';
 
 const router = Router();
 
