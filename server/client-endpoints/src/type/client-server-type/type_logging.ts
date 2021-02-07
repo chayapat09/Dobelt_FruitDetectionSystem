@@ -1,4 +1,5 @@
-import { query_filter } from "@shared/enum";
+// import { query_filter } from "@shared/enum";
+import { query_filter } from "../../shared/enum";
 import { IModel, IModelDetail } from "./type_model";
 
 export interface ILogging {
@@ -8,6 +9,7 @@ export interface ILogging {
 export interface ILog {
     //name : string ;
     timestamp : Date ;
+    //Timestamp should be string ----------------------------------------------------------
     result : number ;
 }
 
@@ -51,4 +53,5 @@ class LoggingQueryResult implements ILogging,IModel,IModelDetail {
 // })
 
 
-export default LoggingQueryResult;
+// export default LoggingQueryResult;
+export {LoggingQueryResult};
