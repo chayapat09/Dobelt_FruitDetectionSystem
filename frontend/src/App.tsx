@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavbarPage from './Components/NavbarPage';
@@ -9,10 +9,13 @@ import ModelManiputlation from './Components/ModelManiputlation';
 
 const robotState = () => <RobotState />
 const summary = () => <Summary />
-const logging = () => <Logging />
+const logging = () => <Logging/>
 const modelManiputlation = () => <ModelManiputlation />
 
 function App() {
+
+  const [selectedSidebar, setSelectedSidebar] = useState('');
+
   return (
     <Router>
       <div>
@@ -21,6 +24,9 @@ function App() {
           <Route exact path='/' component={robotState}/>
           <Route path = '/Summary' component={summary}/>
           <Route path = '/Logging' component={logging}/>
+          {/* <Route path="/Logging">
+            <Logging selectedSidebar={selectedSidebar}/>
+          </Route> */}
           <Route path = '/Gallery'/>
           <Route path = '/ModelManiputlation' component={modelManiputlation}/>
           <Route path = '*'/>

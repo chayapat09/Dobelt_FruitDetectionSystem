@@ -6,7 +6,7 @@ import { ILog, ILogging, ILogQueryParam, LoggingQueryResult } from '../../../ser
 import { getModelAPI } from '../API/GetModel';
 import { IModel, Model } from '../TSEntity/Model';
 
-function Logging() {
+function Logging(props: any) {
 
   let sidebarWidth:number = 1;
   let contentWidth:number = 11;
