@@ -1,14 +1,15 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+const initialPage: number = 1;
 
 const pageSlice = createSlice({
     name: 'page',
-    initialState: 1,
+    initialState: initialPage,
     reducers: {
-        increment: (state) => state + 1,
-        decrement: (state) => state - 1
+        edit: (state, {payload}: PayloadAction<number> ) => state = payload
     }
 });
 
-export const { increment, decrement } = pageSlice.actions
+export const { edit } = pageSlice.actions
 
 export default pageSlice.reducer

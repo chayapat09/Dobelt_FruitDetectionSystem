@@ -7,7 +7,13 @@ const rootReducer = combineReducers({
     page: pageSlice 
 });
 
-export type RootState = ReturnType<typeof rootReducer>
+export type RootState = ReturnType<typeof rootReducer>;
+
+const store = configureStore({
+    reducer: rootReducer
+});
+
+export default store;
 
 // const store = configureStore({
 //     reducer
