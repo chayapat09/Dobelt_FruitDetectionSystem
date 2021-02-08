@@ -10,10 +10,10 @@ function Logging() {
   let contentWidth:number = 11;
 
   const x = new Date();
-  const logA:ILog = {timestamp: x, result: 1}
-  const logB:ILog = {timestamp: x, result: 2}
+  const logA:ILog = {timestamp: x.toDateString(), result: 1}
+  const logB:ILog = {timestamp: x.toDateString(), result: 2}
 
-  const [logTable, setLogTable] = useState<ILog[]>([]);
+  const [logTable, setLogTable] = useState<ILog[]>([logA, logB]);
 
   return (
     <div>
@@ -21,7 +21,7 @@ function Logging() {
         <Row>
           <Col xs={sidebarWidth} sm={sidebarWidth} md={sidebarWidth} lg={sidebarWidth} xl={sidebarWidth} >
             <SidebarTable />
-            <p>{logA.result}</p>
+            {/* <p>{logA.timestamp}</p> */}
           </Col> 
           <Col xs={contentWidth} sm={contentWidth} md={contentWidth} lg={contentWidth} xl={contentWidth} style={{
             backgroundColor: 'white'
@@ -37,7 +37,7 @@ function Logging() {
                 </tr>
               </thead>
               <tbody>
-                <EachLogTable numberOfFruit={0} timestamp='Sunday' result='ok' />
+                {/* <EachLogTable numberOfFruit={0} timestamp='Sunday' result='ok' />
                 <tr>
                   <td>1</td>
                   <td>Monday</td>
@@ -47,13 +47,13 @@ function Logging() {
                   <td>2</td>
                   <td>Tuesday</td>
                   <td>wasted</td>
-                </tr>
-                {/* {logTable.map((eachLog, index) => {
+                </tr> */}
+                {logTable.map((eachLog, index) => {
                   const {timestamp, result} = eachLog;
                   return (
                     <EachLogTable numberOfFruit={index} timestamp={timestamp} result={result} />
                   );
-                })} */}
+                })}
               </tbody>
             </Table>
           </Col> 
