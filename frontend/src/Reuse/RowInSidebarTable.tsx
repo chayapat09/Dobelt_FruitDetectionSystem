@@ -7,6 +7,8 @@ function RowInSidebarTable(props: any) {
   const defaultColor:string = 'white';
   const showColor: string = props.selected ? selectedColor : defaultColor; 
 
+  const mockupFunction = () => console.log('This message is from mockupFunction!');
+
   return (
     <tr>
         <td style={{
@@ -14,7 +16,8 @@ function RowInSidebarTable(props: any) {
             textAlign: 'center',
             backgroundColor: showColor
         }}>
-            {props.model_name}
+            {/* {props.model_name} */}
+            <a href='http://localhost:3000/Logging' onClick={mockupFunction}>{props.model_name}</a>
         </td>
     </tr>        
   );

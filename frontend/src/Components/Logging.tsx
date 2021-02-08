@@ -3,6 +3,8 @@ import { Button, Col, Container, Row, Table } from 'react-bootstrap';
 import EachLogTable from '../Reuse/EachLogTable';
 import SidebarTable from '../Reuse/SidebarTable';
 import { ILog, ILogging, ILogQueryParam, LoggingQueryResult } from '../../../server/client-endpoints/src/type/client-server-type/type_logging';
+import { getModelAPI } from '../API/GetModel';
+import { IModel, Model } from '../TSEntity/Model';
 
 function Logging() {
 
@@ -12,15 +14,25 @@ function Logging() {
   const x = new Date();
   const logA:ILog = {timestamp: x.toDateString(), result: 1}
   const logB:ILog = {timestamp: x.toDateString(), result: 2}
+  const ObjA: Model = new Model('Apple1', 'apple','Alice' ,x , 'Our first model', '1');
 
   const [logTable, setLogTable] = useState<ILog[]>([logA, logB]);
+  const [sidebarTable, setSidebarTable] = useState<Model[]>([ObjA]);
+
+  const setSidebar = () => {
+    getModelAPI(setSidebarTable);
+  }
+
+  useEffect(() =>{
+    setSidebar();
+  }, []);
 
   return (
     <div>
       <Container fluid>
         <Row>
           <Col xs={sidebarWidth} sm={sidebarWidth} md={sidebarWidth} lg={sidebarWidth} xl={sidebarWidth} >
-            <SidebarTable />
+            <SidebarTable sidebarModelList={sidebarTable}/>
             {/* <p>{logA.timestamp}</p> */}
           </Col> 
           <Col xs={contentWidth} sm={contentWidth} md={contentWidth} lg={contentWidth} xl={contentWidth} style={{
