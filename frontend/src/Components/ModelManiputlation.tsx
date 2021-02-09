@@ -32,11 +32,30 @@ function ModelManiputlation() {
   const [selectedModel, setSelectedModel] = useState("");
   
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = () => {
+    setModelName('');
+    setTypeOfFruit('');
+    setAddedBy('');
+    setModelDescription('');
+    setShow(true);
+  }
 
   const postNewModel = () =>{
     console.log(modelName, typeOfFruit, addedBy, modelDescription);
     const newModel: Model = new Model(modelName ,typeOfFruit ,addedBy ,null ,modelDescription , '');
+
+    if(modelName==''  && typeOfFruit==''){
+      alert('please fill model name and type of fruit!');
+      return;
+    }
+    if(modelName==''){
+      alert('please fill model name!');
+      return;
+    }
+    if(typeOfFruit==''){
+      alert('please fill type of fruit!');
+      return;
+    }
 
     axios.post('model', newModel)
     .then(res =>{
@@ -152,12 +171,12 @@ function ModelManiputlation() {
         <Form>
 
           <Form.Group controlId="formModelName">
-            <Form.Label>model name</Form.Label>
-            <Form.Control type="text" onChange={(e)=>setModelName(e.target.value)}/>
+            <Form.Label>model name (required)</Form.Label>
+            <Form.Control type="text" onChange={(e)=>{setModelName(e.target.value)}}/>
           </Form.Group>
 
           <Form.Group controlId="formTypeOfFruit">
-            <Form.Label>Type of fruit</Form.Label>
+            <Form.Label>Type of fruit (required)</Form.Label>
             <Form.Control type="text" onChange={(e)=>setTypeOfFruit(e.target.value)}/>
           </Form.Group>
 

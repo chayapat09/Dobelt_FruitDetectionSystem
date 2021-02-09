@@ -22,7 +22,13 @@ const EachModelTable = (props: any) => {
   const [editedModelDescription, setEditedModelDescription] = useState(props.description);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = () => {
+    setEditedModelName(props.model_name);
+    setEditedTypeOfFruit(props.fruit_name);
+    setEditedAddedBy(props.addedBy);
+    setEditedModelDescription(props.description);
+    setShow(true);
+  }
 
   const selectAndDeleteObj: Model = new Model('' ,'' ,'' ,null ,'' , props._id);
 
@@ -62,6 +68,20 @@ const EachModelTable = (props: any) => {
   // }
 
   const editModel = () => {
+    //handle empty string for model_name and type of fruit
+    if(editedModelName=='' && editedTypeOfFruit==''){
+      alert("Can't change model name and type of fruit to empty string!");
+      return;
+    }
+    if(editedModelName==''){
+      alert("Can't change model name to empty string!");
+      return;
+    }
+    if(editedTypeOfFruit==''){
+      alert("Can't change type of fruit to empty string!");
+      return;
+    }
+
     const editedModel: Model = new Model(
       editedModelName,
       editedTypeOfFruit,
@@ -145,12 +165,12 @@ const EachModelTable = (props: any) => {
               <Form>
 
                 <Form.Group controlId="formModelName">
-                  <Form.Label>model name</Form.Label>
+                  <Form.Label>model name (required)</Form.Label>
                   <Form.Control type="text" value={editedModelName} onChange={(e)=>setEditedModelName(e.target.value)}/>
                 </Form.Group>
 
                 <Form.Group controlId="formTypeOfFruit">
-                  <Form.Label>Type of fruit</Form.Label>
+                  <Form.Label>Type of fruit (required)</Form.Label>
                   <Form.Control type="text" value={editedTypeOfFruit} onChange={(e)=>setEditedTypeOfFruit(e.target.value)}/>
                 </Form.Group>
 
