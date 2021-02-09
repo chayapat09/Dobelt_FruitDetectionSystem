@@ -30,11 +30,8 @@ function RowInSidebarTable(props: any) {
             backgroundColor: showColor
         }}>
             {/* {props.model_name} */}
-            <a href='http://localhost:3000/Logging' onClick={() => dispatch(edit(props._id))}>{props.model_name}</a>
-            {/* <div>
-              <h6 onClick={() => dispatch(edit(props._id))}>{selected}</h6>
-              <h6>{props._id}</h6>
-            </div> */}
+            {/* <a href='http://localhost:3000/Logging' onClick={() => dispatch(edit(props._id))}>{props.model_name}</a> */}
+            <h6 onClick={() => dispatch(edit(props._id))}>{props.model_name}</h6>
         </td>
     </tr>        
   );

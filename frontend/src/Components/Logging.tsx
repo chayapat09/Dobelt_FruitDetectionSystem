@@ -5,8 +5,13 @@ import SidebarTable from '../Reuse/SidebarTable';
 import { ILog, ILogging, ILogQueryParam, LoggingQueryResult } from '../../../server/client-endpoints/src/type/client-server-type/type_logging';
 import { getModelAPI } from '../API/GetModel';
 import { IModel, Model } from '../TSEntity/Model';
+import { useDispatch } from 'react-redux';
+import { edit } from '../Redux/pageSlice';
 
-function Logging(props: any) {
+function Logging() {
+
+  const loggingPageNumber: number = 3;
+  const dispatch = useDispatch();
 
   let sidebarWidth:number = 1;
   let contentWidth:number = 11;
@@ -24,6 +29,7 @@ function Logging(props: any) {
   }
 
   useEffect(() =>{
+    dispatch(edit(loggingPageNumber));
     setSidebar();
   }, []);
 

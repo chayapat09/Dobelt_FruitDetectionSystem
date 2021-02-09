@@ -5,11 +5,13 @@ import NavbarPage from './Components/NavbarPage';
 import RobotState from './Components/RobotState';
 import Summary from './Components/Summary';
 import Logging from './Components/Logging';
+import Gallery from './Components/Gallery';
 import ModelManiputlation from './Components/ModelManiputlation';
 
 const robotState = () => <RobotState />
 const summary = () => <Summary />
 const logging = () => <Logging/>
+const gallery = () => <Gallery />
 const modelManiputlation = () => <ModelManiputlation />
 
 function App() {
@@ -26,7 +28,7 @@ function App() {
         {/* <Route path="/Logging">
           <Logging selectedSidebar={selectedSidebar}/>
         </Route> */}
-        <Route path = '/Gallery'/>
+        <Route path = '/Gallery' component={gallery}/>
         <Route path = '/ModelManiputlation' component={modelManiputlation}/>
         <Route path = '*'/>
       </Switch>  

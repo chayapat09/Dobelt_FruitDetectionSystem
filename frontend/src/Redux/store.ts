@@ -7,7 +7,7 @@ import pageSlice from './pageSlice';
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['selectedID']
+    whitelist: ['selectedID', 'page']
 }
 
 const rootReducer = combineReducers({
