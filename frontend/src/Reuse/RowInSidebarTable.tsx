@@ -14,7 +14,7 @@ function RowInSidebarTable(props: any) {
 
   const selectedColor:string = '#eff0f1';
   const defaultColor:string = 'white';
-  const showColor: string = ( props._id == selected ? selectedColor : defaultColor); 
+  const showColor: string = ( props._id === selected ? selectedColor : defaultColor); 
 
   const mockupFunction = () => console.log('This message is from mockupFunction!');
   // const setModelID = () => {
@@ -30,11 +30,11 @@ function RowInSidebarTable(props: any) {
             backgroundColor: showColor
         }}>
             {/* {props.model_name} */}
-            {/* <a href='http://localhost:3000/Logging' onClick={() => dispatch(edit(props._id))}>{props.model_name}</a> */}
-            <div>
+            <a href='http://localhost:3000/Logging' onClick={() => dispatch(edit(props._id))}>{props.model_name}</a>
+            {/* <div>
               <h6 onClick={() => dispatch(edit(props._id))}>{selected}</h6>
               <h6>{props._id}</h6>
-            </div>
+            </div> */}
         </td>
     </tr>        
   );

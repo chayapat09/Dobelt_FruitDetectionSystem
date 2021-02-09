@@ -17,22 +17,20 @@ function App() {
   const [selectedSidebar, setSelectedSidebar] = useState('');
 
   return (
-    <Router>
-      <div>
-        <NavbarPage />
-        <Switch>
-          <Route exact path='/' component={robotState}/>
-          <Route path = '/Summary' component={summary}/>
-          <Route path = '/Logging' component={logging}/>
-          {/* <Route path="/Logging">
-            <Logging selectedSidebar={selectedSidebar}/>
-          </Route> */}
-          <Route path = '/Gallery'/>
-          <Route path = '/ModelManiputlation' component={modelManiputlation}/>
-          <Route path = '*'/>
-        </Switch>  
-      </div>
-    </Router>
+    <div>
+      <NavbarPage />
+      <Switch>
+        <Route exact path='/' component={robotState}/>
+        <Route path = '/Summary' component={summary}/>
+        <Route path = '/Logging' component={logging}/>
+        {/* <Route path="/Logging">
+          <Logging selectedSidebar={selectedSidebar}/>
+        </Route> */}
+        <Route path = '/Gallery'/>
+        <Route path = '/ModelManiputlation' component={modelManiputlation}/>
+        <Route path = '*'/>
+      </Switch>  
+    </div>
   );
 }
 
