@@ -1,6 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-const selectedIDInitial: string = "600fac81a3cb0f68a033ac20";
+const demoModelID = "600fac81a3cb0f68a033ac20"
+
+const selectedIDInitial: string = '';
 
 const selectedIDSlice = createSlice({
     name: 'selectedID',

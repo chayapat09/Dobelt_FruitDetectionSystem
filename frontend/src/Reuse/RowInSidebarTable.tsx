@@ -31,7 +31,7 @@ function RowInSidebarTable(props: any) {
         }}>
             {/* {props.model_name} */}
             {/* <a href='http://localhost:3000/Logging' onClick={() => dispatch(edit(props._id))}>{props.model_name}</a> */}
-            <h6 onClick={() => dispatch(edit(props._id))}>{props.model_name}</h6>
+            <p onClick={() => dispatch(edit(props._id))}>{props.model_name}</p>
         </td>
     </tr>        
   );
