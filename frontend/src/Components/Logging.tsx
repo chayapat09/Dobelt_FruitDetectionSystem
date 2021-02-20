@@ -27,40 +27,44 @@ function Logging() {
   const logB:ILog = {timestamp: x.toDateString(), result: 2}
   const ObjA: Model = new Model('Apple1', 'apple','Alice' ,x , 'Our first model', '1');
 
-  const [filter, setFilter] = useState(-1);
+  const [filter, setFilter] = useState(0);
   const [currentLogModelName, setCurrentLogModelName] = useState('');
   const [currentLogFruitName, setCurrentLogFruitName] = useState('');
   const [logTable, setLogTable] = useState<ILog[]>([logA, logB]);
   const [sidebarTable, setSidebarTable] = useState<Model[]>([ObjA]);
 
+  const showDropdownFilter = (filter: number) => {
+    return filter===0 ? 'No Filter': filter === 1 ? 'Normal' : 'Defected';
+  }
+
   const handleNoFilter = () => {
     console.log('handleNoFilter is executed.', selectedModelID);
+    setFilter(noFilterNumber);
     if(selectedModelID==''){
-      alert('Please select model first!');
+      alert('Warning: You should select a model first!');
       return;
     }
     //pass the requirement
-    setFilter(noFilterNumber);
     getLogTableAPI(setLogTable, setCurrentLogModelName, setCurrentLogFruitName, selectedModelID, noFilterNumber);
   }
 
   const handleNormal = () => {
     console.log('handleNormal is executed.', selectedModelID);
+    setFilter(normalNumber);
     if(selectedModelID==''){
-      alert('Please select model first!');
+      alert('Warning: You should select a model first!');
       return;
     }
-    setFilter(normalNumber);
     getLogTableAPI(setLogTable, setCurrentLogModelName, setCurrentLogFruitName, selectedModelID, normalNumber);
   }
 
   const handleDefected = () => {
     console.log('handleDefected is executed.', selectedModelID);
+    setFilter(defectedNumber);
     if(selectedModelID==''){
-      alert('Please select model first!');
+      alert('Warning: You should select a model first!');
       return;
     }
-    setFilter(defectedNumber);
     getLogTableAPI(setLogTable, setCurrentLogModelName, setCurrentLogFruitName, selectedModelID, defectedNumber);
   }
 
@@ -78,7 +82,11 @@ function Logging() {
       <Container fluid>
         <Row>
           <Col xs={sidebarWidth} sm={sidebarWidth} md={sidebarWidth} lg={sidebarWidth} xl={sidebarWidth} >
-            <SidebarTable sidebarModelList={sidebarTable}/>
+            <SidebarTable sidebarModelList={sidebarTable}
+                          filter={filter}
+                          setLogTable={setLogTable}
+                          setCurrentLogModelName={setCurrentLogModelName}
+                          setCurrentLogFruitName={setCurrentLogFruitName}/>
             {/* <p>{logA.timestamp}</p> */}
           </Col> 
           <Col xs={contentWidth} sm={contentWidth} md={contentWidth} lg={contentWidth} xl={contentWidth} style={{
@@ -97,9 +105,9 @@ function Logging() {
                 <p style={{ 
                   margin: '10px', 
                   marginRight: '30px' 
-                }}>Filter : {filter== -1 ? '': filter}</p>                
+                }}>Filter : {showDropdownFilter(filter)       }</p>                
               </div>
-              <DropdownButton id="dropdown-basic-button" title="Filter" className="pull-right" style={{
+              <DropdownButton id="dropdown-basic-button" title={showDropdownFilter(filter)} className="pull-right" style={{
                 marginTop: '10px',
                 marginRight: '10px'
               }}>

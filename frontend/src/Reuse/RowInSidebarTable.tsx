@@ -3,6 +3,8 @@ import { Container, Table } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { edit } from '../Redux/selectedIDSlice';
 import { RootState } from '../Redux/store';
+import filter from '../Components/Logging';
+import { getLogTableAPI } from '../API/GetLogTable';
 
 function RowInSidebarTable(props: any) {
 
@@ -22,6 +24,15 @@ function RowInSidebarTable(props: any) {
   //   return dispatch(edit(props._id));
   // }
 
+  const handleSidebarListener = () => {
+    dispatch(edit(props._id));
+    getLogTableAPI(props.setLogTable,
+                   props.setCurrentLogModelName,
+                   props.setCurrentLogFruitName,
+                   props._id,
+                   props.filter);
+  }
+
   return (
     <tr>
         <td style={{
@@ -31,7 +42,7 @@ function RowInSidebarTable(props: any) {
         }}>
             {/* {props.model_name} */}
             {/* <a href='http://localhost:3000/Logging' onClick={() => dispatch(edit(props._id))}>{props.model_name}</a> */}
-            <p onClick={() => dispatch(edit(props._id))}>{props.model_name}</p>
+            <p onClick={handleSidebarListener}>{props.model_name}</p>
         </td>
     </tr>        
   );
