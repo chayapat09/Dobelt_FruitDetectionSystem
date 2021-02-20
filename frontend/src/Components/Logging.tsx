@@ -86,14 +86,14 @@ function Logging() {
                           filter={filter}
                           setLogTable={setLogTable}
                           setCurrentLogModelName={setCurrentLogModelName}
-                          setCurrentLogFruitName={setCurrentLogFruitName}/>
+                          setCurrentLogFruitName={setCurrentLogFruitName} />
             {/* <p>{logA.timestamp}</p> */}
           </Col> 
           <Col xs={contentWidth} sm={contentWidth} md={contentWidth} lg={contentWidth} xl={contentWidth} style={{
             backgroundColor: 'white'
           }}>
             <Row>
-              <div>
+              <Col xs={10} sm={10} md={11} lg={11} xl={11}>
                 <p style={{ 
                   margin: '10px',
                   marginRight: '30px' 
@@ -105,16 +105,19 @@ function Logging() {
                 <p style={{ 
                   margin: '10px', 
                   marginRight: '30px' 
-                }}>Filter : {showDropdownFilter(filter)       }</p>                
-              </div>
-              <DropdownButton id="dropdown-basic-button" title={showDropdownFilter(filter)} className="pull-right" style={{
-                marginTop: '10px',
-                marginRight: '10px'
-              }}>
-                <Dropdown.Item onClick={handleNoFilter}>No Filter</Dropdown.Item>
-                <Dropdown.Item onClick={handleNormal}>Normal</Dropdown.Item>
-                <Dropdown.Item onClick={handleDefected}>Defected</Dropdown.Item>
-              </DropdownButton>
+                }}>Filter : {showDropdownFilter(filter)}</p>                
+              </Col>
+              <Col xs={2} sm={2} md={1} lg={1} xl={1}>
+                <DropdownButton id="dropdown-basic-button" title={showDropdownFilter(filter)} className="text-right" style={{
+                  justifyContent: 'center',
+                  marginTop: '10px',
+                  marginRight: '10px'
+                }}>
+                  <Dropdown.Item onClick={handleNoFilter}>No Filter</Dropdown.Item>
+                  <Dropdown.Item onClick={handleNormal}>Normal</Dropdown.Item>
+                  <Dropdown.Item onClick={handleDefected}>Defected</Dropdown.Item>
+                </DropdownButton>
+              </Col>
             </Row>
             <Row>
               <Table bordered hover style={{

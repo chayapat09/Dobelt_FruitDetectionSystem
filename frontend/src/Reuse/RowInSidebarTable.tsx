@@ -17,6 +17,7 @@ function RowInSidebarTable(props: any) {
   const selectedColor:string = '#eff0f1';
   const defaultColor:string = 'white';
   const showColor: string = ( props._id === selected ? selectedColor : defaultColor); 
+  const textWeight: any = ( props._id === selected ? "bold" : "normal");
 
   const mockupFunction = () => console.log('This message is from mockupFunction!');
   // const setModelID = () => {
@@ -38,7 +39,8 @@ function RowInSidebarTable(props: any) {
         <td style={{
             border: 'none',
             textAlign: 'center',
-            backgroundColor: showColor
+            backgroundColor: showColor,
+            fontWeight: textWeight
         }}>
             {/* {props.model_name} */}
             {/* <a href='http://localhost:3000/Logging' onClick={() => dispatch(edit(props._id))}>{props.model_name}</a> */}
