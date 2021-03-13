@@ -30,8 +30,8 @@ function Logging() {
   const [filter, setFilter] = useState(0);
   const [currentLogModelName, setCurrentLogModelName] = useState('');
   const [currentLogFruitName, setCurrentLogFruitName] = useState('');
-  const [logTable, setLogTable] = useState<ILog[]>([logA, logB]);
-  const [sidebarTable, setSidebarTable] = useState<Model[]>([ObjA]);
+  const [logTable, setLogTable] = useState<ILog[]>([]);
+  const [sidebarTable, setSidebarTable] = useState<Model[]>([]);
 
   const showDropdownFilter = (filter: number) => {
     return filter===0 ? 'No Filter': filter === 1 ? 'Normal' : 'Defected';
