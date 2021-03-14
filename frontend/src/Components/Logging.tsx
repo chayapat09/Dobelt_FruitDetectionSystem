@@ -98,7 +98,7 @@ function Logging() {
       <Container fluid>
         <Row>
           <Col xs={sidebarWidth} sm={sidebarWidth} md={sidebarWidth} lg={sidebarWidth} xl={sidebarWidth} >
-            <SidebarTable sidebarModelList={sidebarTable} />
+            <SidebarTable sidebarModelList={sidebarTable} dummy={dummy} setDummy={setDummy}/>
             {/* <p>{logA.timestamp}</p> */}
           </Col> 
           <Col xs={contentWidth} sm={contentWidth} md={contentWidth} lg={contentWidth} xl={contentWidth} style={{

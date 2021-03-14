@@ -27,6 +27,7 @@ function RowInSidebarTable(props: any) {
   const handleSidebarListener = () => {
     dispatch(edit(props._id));
     // getLogTableAPI();
+    props.setDummy(props.dummy+1);
   }
 
   return (
