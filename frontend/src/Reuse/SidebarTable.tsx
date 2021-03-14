@@ -27,12 +27,7 @@ function SidebarTable(props: any) {
           {sidebarModelList.map((eachObj) => {
             const {_id, model_name} = eachObj;
               return (
-              <RowInSidebarTable model_name={model_name} _id={_id} 
-                                filter={props.filter}
-                                setLogTable={props.setLogTable}
-                                setCurrentLogModelName={props.setCurrentLogModelName}
-                                setCurrentLogFruitName={props.setCurrentLogFruitName}
-                                />
+              <RowInSidebarTable model_name={model_name} _id={_id} />
             );
           })}
         </tbody>

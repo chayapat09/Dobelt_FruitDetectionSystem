@@ -8,7 +8,10 @@ import { IModel, Model } from '../TSEntity/Model';
 import { useSelector, useDispatch } from 'react-redux';
 import { edit } from '../Redux/pageSlice';
 import { RootState } from '../Redux/store';
-import { getLogTableAPI } from '../API/GetLogTable';
+import GetLogTable from '../API/GetLogTable';
+import { editFilter } from '../Redux/filterSlice';
+import { useRef } from 'react';
+import { isConstructorDeclaration } from 'typescript';
 
 function Logging() {
 
@@ -19,7 +22,13 @@ function Logging() {
   let sidebarWidth:number = 1;
   let contentWidth:number = 11;
 
-  const selectedModelID: string = useSelector((state: RootState) => state.selectedID );
+  //States in Redux
+  let selectedModelID: string = useSelector((state: RootState) => state.selectedID );
+  let filter: number = useSelector((state: RootState) => state.filter );
+  let currentLogModelName: string = useSelector((state: RootState) => state.currentLogModelName );
+  let currentLogFruitName: string = useSelector((state: RootState) => state.currentLogFruitName );
+  let logTable: ILog[] = useSelector((state: RootState) => state.logTable );
+
   const dispatch = useDispatch();
 
   const x = new Date();
@@ -27,11 +36,10 @@ function Logging() {
   const logB:ILog = {timestamp: x.toDateString(), result: 2}
   const ObjA: Model = new Model('Apple1', 'apple','Alice' ,x , 'Our first model', '1');
 
-  const [filter, setFilter] = useState(0);
-  const [currentLogModelName, setCurrentLogModelName] = useState('');
-  const [currentLogFruitName, setCurrentLogFruitName] = useState('');
-  const [logTable, setLogTable] = useState<ILog[]>([]);
   const [sidebarTable, setSidebarTable] = useState<Model[]>([]);
+  const [dummy, setDummy] = useState(0);
+
+  const childRef: any = useRef();
 
   const showDropdownFilter = (filter: number) => {
     return filter===0 ? 'No Filter': filter === 1 ? 'Normal' : 'Defected';
@@ -39,33 +47,39 @@ function Logging() {
 
   const handleNoFilter = () => {
     console.log('handleNoFilter is executed.', selectedModelID);
-    setFilter(noFilterNumber);
+    dispatch(editFilter(noFilterNumber));
     if(selectedModelID==''){
       alert('Warning: You should select a model first!');
       return;
     }
     //pass the requirement
-    getLogTableAPI(setLogTable, setCurrentLogModelName, setCurrentLogFruitName, selectedModelID, noFilterNumber);
+    //childRef.current.getLogTableAPI();
+    setDummy(dummy+1);
   }
 
   const handleNormal = () => {
     console.log('handleNormal is executed.', selectedModelID);
-    setFilter(normalNumber);
+    dispatch(editFilter(normalNumber));
     if(selectedModelID==''){
       alert('Warning: You should select a model first!');
       return;
     }
-    getLogTableAPI(setLogTable, setCurrentLogModelName, setCurrentLogFruitName, selectedModelID, normalNumber);
+    // console.log('debug1');
+    // console.log(filter);    
+    // childRef.current.getLogTableAPI();
+    // console.log('debug2');
+    setDummy(dummy+1);
   }
 
   const handleDefected = () => {
     console.log('handleDefected is executed.', selectedModelID);
-    setFilter(defectedNumber);
+    dispatch(editFilter(defectedNumber));
     if(selectedModelID==''){
       alert('Warning: You should select a model first!');
       return;
     }
-    getLogTableAPI(setLogTable, setCurrentLogModelName, setCurrentLogFruitName, selectedModelID, defectedNumber);
+    //childRef.current.getLogTableAPI();
+    setDummy(dummy+1);
   }
 
   const setSidebar = () => {
@@ -75,18 +89,16 @@ function Logging() {
   useEffect(() =>{
     dispatch(edit(loggingPageNumber));
     setSidebar();
-  }, [setLogTable]);
+    console.log('rerender logging page.');
+    childRef.current.getLogTableAPI();
+  }, [dummy]);
 
   return (
     <div>
       <Container fluid>
         <Row>
           <Col xs={sidebarWidth} sm={sidebarWidth} md={sidebarWidth} lg={sidebarWidth} xl={sidebarWidth} >
-            <SidebarTable sidebarModelList={sidebarTable}
-                          filter={filter}
-                          setLogTable={setLogTable}
-                          setCurrentLogModelName={setCurrentLogModelName}
-                          setCurrentLogFruitName={setCurrentLogFruitName} />
+            <SidebarTable sidebarModelList={sidebarTable} />
             {/* <p>{logA.timestamp}</p> */}
           </Col> 
           <Col xs={contentWidth} sm={contentWidth} md={contentWidth} lg={contentWidth} xl={contentWidth} style={{
@@ -150,6 +162,9 @@ function Logging() {
                   })}
                 </tbody>
               </Table>
+            </Row>
+            <Row>
+              <GetLogTable ref={childRef} />
             </Row>
           </Col> 
         </Row>

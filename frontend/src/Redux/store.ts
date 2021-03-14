@@ -3,16 +3,25 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import selectedIDSlice from './selectedIDSlice';
 import pageSlice from './pageSlice';
+import filterSlice from './filterSlice';
+import currentLogModelNameSlice from './currentLogModelNameSlice';
+import currentLogFruitNameSlice from './currentLogFruitNameSlice';
+import logTableSlice from './logTableSlice';
 
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['selectedID', 'page']
+    //Whitelist for saving in persistance storage
+    whitelist: ['selectedID', 'page', 'filter', 'currentLogModelName', 'currentLogFruitName', 'logTable']
 }
 
 const rootReducer = combineReducers({
     selectedID: selectedIDSlice,
-    page: pageSlice 
+    page: pageSlice, 
+    filter: filterSlice,
+    currentLogModelName: currentLogModelNameSlice,
+    currentLogFruitName: currentLogFruitNameSlice,
+    logTable: logTableSlice
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

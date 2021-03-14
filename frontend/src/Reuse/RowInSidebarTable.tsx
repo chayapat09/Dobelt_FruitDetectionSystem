@@ -3,8 +3,7 @@ import { Container, Table } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { edit } from '../Redux/selectedIDSlice';
 import { RootState } from '../Redux/store';
-import filter from '../Components/Logging';
-import { getLogTableAPI } from '../API/GetLogTable';
+// import { getLogTableAPI } from '../API/GetLogTable';
 
 function RowInSidebarTable(props: any) {
 
@@ -27,11 +26,7 @@ function RowInSidebarTable(props: any) {
 
   const handleSidebarListener = () => {
     dispatch(edit(props._id));
-    getLogTableAPI(props.setLogTable,
-                   props.setCurrentLogModelName,
-                   props.setCurrentLogFruitName,
-                   props._id,
-                   props.filter);
+    // getLogTableAPI();
   }
 
   return (
