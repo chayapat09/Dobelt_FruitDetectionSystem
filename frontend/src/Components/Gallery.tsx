@@ -12,6 +12,7 @@ import GetLogTable from '../API/GetLogTable';
 import { editFilter } from '../Redux/filterSlice';
 import { useRef } from 'react';
 import { isConstructorDeclaration } from 'typescript';
+import GalleryCardArea from './GalleryCardArea';
 
 function Gallery() {
 
@@ -126,7 +127,7 @@ function Gallery() {
               </Col>
             </Row>
             <Row>
-              
+              <GalleryCardArea />
             </Row>
             <Row>
               <GetLogTable ref={childRef} />
