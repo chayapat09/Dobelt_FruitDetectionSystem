@@ -7,7 +7,8 @@ import path from 'path';
 import dotenv from 'dotenv';
 import commandLineArgs from 'command-line-args';
 
-
+import fs, { fstatSync } from 'fs-extra';
+import { getPathToGallery } from '@shared/gallery';
 
 (() => {
     // Setup command line options
@@ -26,4 +27,12 @@ import commandLineArgs from 'command-line-args';
     if (result2.error) {
         throw result2.error;
     }
+})();
+
+// Create gallery folder if not exists
+(async () => {
+    const galleryPath = getPathToGallery();
+    const exist = await fs.pathExists(galleryPath);
+    if (exist) return;
+    await fs.mkdirp(galleryPath);
 })();
