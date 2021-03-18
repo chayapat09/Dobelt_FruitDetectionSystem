@@ -9,6 +9,7 @@ import 'express-async-errors';
 
 import BaseRouter from './routes';
 import EdgeRouter from './routes/edge'
+import staticRouter from './routes/static';
 import logger from '@shared/Logger';
 
 const app = express();
@@ -58,19 +59,12 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
  ***********************************************************************************/
 
 app.use(express.static(path.join(__dirname,'../../../','frontend','build')));
-
-// app.use(express.static('build'));
+app.use('/static' , staticRouter);
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname,'../../../','frontend','build','index.html'));
 });
-// const viewsDir = path.join(__dirname, 'views');
-// app.set('views', viewsDir);
-// const staticDir = path.join(__dirname, 'public');
-// app.use(express.static(staticDir));
-// app.get('*', (req: Request, res: Response) => {
-//     res.sendFile('index.html', {root: staticDir});
-// });
+
 
 // Export express instance
 export default app;

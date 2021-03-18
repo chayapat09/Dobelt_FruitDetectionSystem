@@ -17,6 +17,5 @@ router.get('/' , async (req : Request , res : Response ) => {
     const gallerys : GalleryQueryResult = await getGallery(filter , model_id);
     
     res.json(gallerys);
-})
-
+});
 export default router;
