@@ -20,7 +20,7 @@ export const robotState = (robotState : number) => {
 export const detection = async (detectionResult : any , model_id : string ) => {
     // Add to Log DB
     const log : Log = new Log(model_id,new Date() , detectionResult);
-    await logDao.add(log);
+    const addedLogId = await logDao.add(log);
 
     // Send out new Result (Log aggregation)
     const summaryQueryResult = await logDao.getSummary(model_id);
@@ -34,5 +34,7 @@ export const detection = async (detectionResult : any , model_id : string ) => {
     
     const sockets : Socket[] = modelSocket.getSockets(model_id);
     send_predictionSummary(sockets , predictionSummary);
+
+    return addedLogId
 }
 // Need to send model_id because if model is change between prediction consistence state only edge will know

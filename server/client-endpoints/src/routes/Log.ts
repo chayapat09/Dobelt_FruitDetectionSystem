@@ -5,7 +5,7 @@ import { Request, Response, Router } from 'express';
 const router = Router();
 
 /******************************************************************************
- *                      Get All Model - "GET /api/model"
+ *                      Get All Model - "GET /api/log"
  ******************************************************************************/
 router.get('/' , async (req : Request , res : Response ) => {
     if (typeof req.query.filter !== 'string' || typeof req.query.model_id !== 'string') {

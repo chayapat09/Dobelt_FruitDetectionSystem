@@ -3,7 +3,7 @@ import express ,{ Request, Response, Router } from 'express';
 
 const router = Router();
 
-router.use('/thumbnail' , express.static(getPathToGallery()));
-router.use('/full' , express.static(getPathToGallery()));
+router.use('/gallery/thumbnail' , express.static(getPathToGallery()));
+router.use('/gallery/full' , express.static(getPathToGallery()));
 
 export default router;

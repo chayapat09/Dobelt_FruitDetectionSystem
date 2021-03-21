@@ -19,7 +19,7 @@ export interface ILogDao {
     getAll: () => Promise<ILog[]>;
     getSummary : (model_id : string) => Promise<SummaryResult>;
     query : (query : ILogQuery) => Promise<ILog[]>;
-    add: (user: ILog) => Promise<void>;
+    add: (user: ILog) => Promise<string>;
     // update: (user: IUser) => Promise<void>;
     delete: (id: string) => Promise<void>;
 }
@@ -125,7 +125,7 @@ export class LogDao implements ILogDao {
                 }
             }
         ]).toArray();
-        return result.length > 0 ?  result[0].logs : [];
+        return result.length > 0 ? result[0].logs : [];
     }
 
 
@@ -133,7 +133,7 @@ export class LogDao implements ILogDao {
      *
      * @param log
      */
-    public async add(log: ILog): Promise<void> {
+    public async add(log: ILog): Promise<string> {
 
         const db = await database.getDb();
         const collection = db.collection(LogDao.collectionName);
@@ -141,8 +141,8 @@ export class LogDao implements ILogDao {
         delete addDoc._id;
         addDoc.model_id = new ObjectID(addDoc.model_id);
         const result = await collection.insertOne(addDoc);
-
         if (!result.result.ok) throw Error('Insert Log into Database Failed');
+        return result.insertedId.toHexString();
 
         //return Promise.resolve(undefined);
     }

@@ -7,12 +7,12 @@ const router = Router();
 //     result : 1
 // }
 
-router.post('/' , (req : Request , res : Response) => {
+router.post('/' , async (req : Request , res : Response) => {
     const predictionResult : number = req.body.result;
     const modelId : string = req.body.model_id;
 
-    detection(predictionResult , modelId);
-    
-    res.json({ok : true});
+    const log_id = await detection(predictionResult , modelId);
+    // TODO : return log_id to client
+    res.json({ok : true , log_id : log_id});
 })
 export default router;
