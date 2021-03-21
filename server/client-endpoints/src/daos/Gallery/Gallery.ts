@@ -23,7 +23,7 @@ export interface ILogDao {
     getAll: () => Promise<IGallery[]>;
     query : (query : IGalleryQuery) => Promise<IGallery[]>;
     add: (log_id: string) => Promise<ObjectID>;
-    setUrls(docId: ObjectID , thumbnailUrl : string , fullUrl : string) : Promise<void>
+    setUrls(docId: ObjectID , log_id : ObjectID , thumbnailUrl : string , fullUrl : string) : Promise<void>
     // update: (user: IUser) => Promise<void>;
     delete: (id: string) => Promise<void>;
 }
@@ -104,24 +104,24 @@ export class GalleryDao implements ILogDao {
      *
      * @param log
      */
-    public async add(log_id: string): Promise<ObjectID> {
+    public async add(): Promise<ObjectID> {
 
         const db = await database.getDb();
         const collection = db.collection(GalleryDao.collectionName);
-        const _log_id = new ObjectID(log_id);
-
+        // const _log_id = new ObjectID(log_id);    
         const addDoc = {
-            log_id : _log_id,
+            // log_id : _log_id,
         }
         const result = await collection.insertOne(addDoc);
         if (!result.result.ok) throw Error('Add gallery doc Failed')
         return result.insertedId;
     }
 
-    public async setUrls(docId : ObjectID , thumbnailUrl : string , fullUrl : string) : Promise<void> {
+    public async setUrls(docId : ObjectID , log_id : ObjectID, thumbnailUrl : string , fullUrl : string) : Promise<void> {
         const db = await database.getDb();
         const collection = db.collection(GalleryDao.collectionName);
         const result = await collection.findOneAndUpdate({_id : docId} , {$set : {
+            log_id : log_id ,
             thumbnailUrl : thumbnailUrl , 
             fullUrl : fullUrl,
         }});

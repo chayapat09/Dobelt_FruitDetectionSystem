@@ -28,14 +28,14 @@ export const getGallery = async (filter : number , model_id : string ) : Promise
     );
 }
 
-export const addGalleryImage = async ( image : any , log_id : string) => {
-    const doc_id : ObjectID = await galleryDao.add(log_id);
-    const docId : string = doc_id.toHexString(); // Used as file_name.jpg
-    const fileName = docId + '.jpg';
-    await createImgFile(fileName , image);
-    await galleryDao.setUrls(
-        doc_id , 
-        `/api/gallery/thumbnail/${fileName}` ,
-        `/api/gallery/full/${fileName}` 
-    );
-}
+// export const addGalleryImage = async ( image : any , log_id : string) => {
+//     const doc_id : ObjectID = await galleryDao.add(log_id);
+//     const docId : string = doc_id.toHexString(); // Used as file_name.jpg
+//     const fileName = docId + '.jpg';
+//     await createImgFile(fileName , image);
+//     await galleryDao.setUrls(
+//         doc_id , 
+//         `/api/gallery/thumbnail/${fileName}` ,
+//         `/api/gallery/full/${fileName}` 
+//     );
+// }

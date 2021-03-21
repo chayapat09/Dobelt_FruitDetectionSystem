@@ -42,8 +42,7 @@ const storage = multer.diskStorage({
     
     filename: async function (req: Request, file: any, cb: any) {
         // Add to DB Here ?? 
-        const log_id : string = req.body.log_id;
-        const doc_id : ObjectID = await galleryDao.add(log_id);
+        const doc_id : ObjectID = await galleryDao.add();
         const docId : string = doc_id.toHexString();
         
         const originalname : string = file.originalname;
@@ -51,12 +50,6 @@ const storage = multer.diskStorage({
         const extension = splitDotName[splitDotName.length - 1];
 
         const fileName = docId + '.' + extension;
-
-        await galleryDao.setUrls(
-            doc_id , 
-            `/static/gallery/thumbnail/${fileName}` ,
-            `/static/gallery/full/${fileName}` 
-        );
         
         cb(null, fileName);
     }
@@ -76,13 +69,19 @@ const upload = multer({storage: storage, fileFilter : fileFilter});
 
 router.post('/upload', upload.single('image') , async ( req: Request , res:Response )=> {
     const file = req.file;
-
+    console.log(req.body);
 
     const fileNameList = file.filename.split('.');
     fileNameList.pop();
     const galleryDoc_id : string = fileNameList.join('');
-
-
+    const docID = new ObjectID(galleryDoc_id);
+    const log_id = new ObjectID(req.body.log_id);
+    await galleryDao.setUrls(
+        docID , 
+        log_id ,
+        `/static/gallery/thumbnail/${file.filename}` ,
+        `/static/gallery/full/${file.filename}` 
+    );
 
     // await galleryDao.setUrls(
     //     doc_id , 
