@@ -77,7 +77,8 @@ export class GalleryDao implements ILogDao {
         const logDocuments = new Map();
         logs.forEach(log => {
             logs_id.push(new ObjectID(log._id));
-            logDocuments.set(log._id , log);
+            const log_id : any = log._id;
+            logDocuments.set(log_id.toHexString(), log);
         });
         // If limited needed limit before here
 
@@ -88,11 +89,12 @@ export class GalleryDao implements ILogDao {
         const result : IGalleryQueryResultFromDao[] = [];
 
         galleryResult.forEach( gallery => {
+
+            const log_id :any = gallery.log_id;
             const galleryQueryRes : IGalleryQueryResultFromDao = {
                 ...gallery , 
-                logDocument : logDocuments.get(gallery._id)
+                logDocument : logDocuments.get(log_id.toHexString())
             }
-
             result.push(galleryQueryRes)
         })
         return result;
