@@ -75,8 +75,17 @@
       "@shared/*": [
         "src/shared/*"
       ],
-      "@server": [
-        "src/Server"
+      "@serverExpress": [
+        "src/Server.Express"
+      ],
+      "@in-memory-data": [
+        "src/in-memory-data/*"
+      ],
+      "@controller": [
+        "src/controller/*"
+      ],
+      "@service": [
+        "src/service/*"
       ]
     },
   },

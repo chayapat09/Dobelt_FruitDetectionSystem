@@ -56,6 +56,7 @@ const storage = multer.diskStorage({
 });
 
 const fileFilter = (req: any,file: any,cb: any) => {
+    console.log(file.mimetype);
     if(file.mimetype === "image/jpg"  || 
        file.mimetype === "image/jpeg"  || 
        file.mimetype === "image/png"){
@@ -69,8 +70,6 @@ const upload = multer({storage: storage, fileFilter : fileFilter});
 
 router.post('/upload', upload.single('image') , async ( req: Request , res:Response )=> {
     const file = req.file;
-    console.log(req.body);
-
     const fileNameList = file.filename.split('.');
     fileNameList.pop();
     const galleryDoc_id : string = fileNameList.join('');
