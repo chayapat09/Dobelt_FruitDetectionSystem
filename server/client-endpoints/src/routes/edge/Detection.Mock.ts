@@ -8,9 +8,9 @@ const router = Router();
 // }
 
 router.post('/' , async (req : Request , res : Response) => {
-    const predictionResult : number = req.body.result;
+    const predictionResult : number = ((typeof req.body.result === 'string') ? parseInt(req.body.result) : req.body.result);
     const modelId : string = req.body.model_id;
-
+    console.log(req.body);
     const log_id = await detection(predictionResult , modelId);
     // TODO : return log_id to client
     res.json({ok : true , log_id : log_id});

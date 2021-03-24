@@ -23,7 +23,7 @@ class Belt extends EventEmitter {
     private detectionSensorState : number = Belt.NOT_DETECTED;
     private socket : Socket | null;
 
-    private nowState : number = 0;
+    private serverState : number = 0;
 
     constructor(socket : Socket) {
         super();
@@ -31,6 +31,7 @@ class Belt extends EventEmitter {
 
 
         socket.on('belt::detectionSensorState' , this.detectionSensorStateCallback);
+        this.initializedNewSocket(socket);
     }
 
     initializedNewSocket(socket : Socket) {
@@ -69,7 +70,7 @@ class Belt extends EventEmitter {
 
     async stateController(targetState : number) {
         // TODO : IF edge Reject ?? Retry ??
-        switch (this.nowState) {
+        switch (this.serverState) {
             case STATE.BELT_MOVING:
                 if (targetState === STATE.BELT_MOVING) await this.edge_BeltMoving_BeltMoving();
                 if (targetState === STATE.BELT_STOP) await this.edge_BeltMoving_BeltStop();
@@ -99,7 +100,7 @@ class Belt extends EventEmitter {
                 return;
             }
             this.socket.emit(Belt.to_beltState , Belt.BELT_MOVE , (response : any) => {
-                this.nowState = STATE.BELT_MOVING;
+                this.serverState = STATE.BELT_MOVING;
                 resolve();
             });
 
@@ -116,7 +117,7 @@ class Belt extends EventEmitter {
                 return;
             }
             this.socket.emit(Belt.to_beltState , Belt.BELT_STOP , (response : any) => {
-                this.nowState = STATE.BELT_STOP;
+                this.serverState = STATE.BELT_STOP;
                 resolve();
             });
 
@@ -132,7 +133,7 @@ class Belt extends EventEmitter {
                 return;
             }
             this.socket.emit(Belt.to_beltState , Belt.BELT_STOP , (response : any) => {
-                this.nowState = STATE.BELT_STOP;
+                this.serverState = STATE.BELT_STOP;
                 resolve();
             });
 
@@ -148,7 +149,7 @@ class Belt extends EventEmitter {
                 return;
             }
             this.socket.emit(Belt.to_beltState , Belt.BELT_MOVE , (response : any) => {
-                this.nowState = STATE.BELT_MOVING;
+                this.serverState = STATE.BELT_MOVING;
                 resolve();
             });
 
