@@ -6,8 +6,6 @@ export interface IGalleryQueryResult {
     logDocument : ILog;
 }
 
-
-import { IGallery } from "@entities/Gallery";
 // import { query_filter } from "@shared/enum";
 import { query_filter } from "../../shared/enum";
 import { ILog } from "./type_logging";
