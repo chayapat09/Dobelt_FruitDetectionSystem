@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Button, Col, Container, Dropdown, DropdownButton, Row, Table } from 'react-bootstrap';
 import EachLogTable from '../Reuse/EachLogTable';
 import SidebarTable from '../Reuse/SidebarTable';
-import { ILog, ILogging, ILogQueryParam, LoggingQueryResult } from '../../../server/client-endpoints/src/type/client-server-type/type_logging';
+import { IGalleryQueryResult } from '../../../server/client-endpoints/src/type/client-server-type/type_gallery';
 import { getModelAPI } from '../API/GetModel';
 import { IModel, Model } from '../TSEntity/Model';
 import { useSelector, useDispatch } from 'react-redux';
 import { edit } from '../Redux/pageSlice';
 import { RootState } from '../Redux/store';
-import GetLogTable from '../API/GetLogTable';
+import GetGallery from '../API/GetGallery';
 import { editFilter } from '../Redux/filterSlice';
 import { useRef } from 'react';
 import { isConstructorDeclaration } from 'typescript';
@@ -28,6 +28,7 @@ function Gallery() {
   let filter: number = useSelector((state: RootState) => state.filter );
   let currentLogModelName: string = useSelector((state: RootState) => state.currentLogModelName );
   let currentLogFruitName: string = useSelector((state: RootState) => state.currentLogFruitName );
+  let galleryData: IGalleryQueryResult[] = useSelector((state: RootState) => state.galleryData );
 
   const dispatch = useDispatch();
 
@@ -85,7 +86,7 @@ function Gallery() {
     dispatch(edit(galleryPageNumber));
     setSidebar();
     console.log('Welcome to our gallery!');
-    childRef.current.getLogTableAPI();
+    childRef.current.getGalleryDataAPI();
   }, [dummy]);
 
   return (
@@ -130,7 +131,8 @@ function Gallery() {
               <GalleryCardArea />
             </Row>
             <Row>
-              <GetLogTable ref={childRef} />
+              <GetGallery ref={childRef} />
+              <p>{galleryData.length}</p>
             </Row>
           </Col> 
         </Row>

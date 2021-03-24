@@ -3,10 +3,10 @@ import { useSelector, useDispatch, connect } from 'react-redux';
 import { RootState } from '../Redux/store';
 import { editCurrentLogModelName } from '../Redux/currentLogModelNameSlice';
 import { editCurrentLogFruitName } from '../Redux/currentLogFruitNameSlice';
-import { editLogTable } from '../Redux/logTableSlice';
+import { editGalleryData } from '../Redux/galleryDataSlice';
 import { forwardRef, useImperativeHandle } from 'react';
 
-const GetLogTable = forwardRef((props: any, ref: any) => {
+const GetGalleryData = forwardRef((props: any, ref: any) => {
 
   //Get states in Redux
   let selectedModelID: string = useSelector((state: RootState) => state.selectedID );
@@ -16,16 +16,16 @@ const GetLogTable = forwardRef((props: any, ref: any) => {
 
   useImperativeHandle(ref, () => ({
 
-    getLogTableAPI() {
+    getGalleryDataAPI() {
       console.log('filterAPI = ', filterAPI);
-      var logTableAPI: string = 'log?model_id=' + selectedModelID + '&filter=' + `${filterAPI}`;
-      console.log('request to ' + logTableAPI);
-      axios.get(logTableAPI).
+      var galleryDataAPI: string = 'gallery?model_id=' + selectedModelID + '&filter=' + `${filterAPI}`;
+      console.log('request to ' + galleryDataAPI);
+      axios.get(galleryDataAPI).
       then(res =>{
           console.log(res.data);
           dispatch(editCurrentLogModelName(res.data.model_name));
           dispatch(editCurrentLogFruitName(res.data.fruit_name));
-          dispatch(editLogTable(res.data.queryResult));
+          dispatch(editGalleryData(res.data.queryResult));
       }).
       catch(err =>{
         console.log(err);
@@ -39,4 +39,4 @@ const GetLogTable = forwardRef((props: any, ref: any) => {
   );
 })
 
-export default GetLogTable
+export default GetGalleryData
