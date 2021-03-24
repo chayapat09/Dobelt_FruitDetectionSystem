@@ -93,15 +93,15 @@ function Gallery() {
     <div>
       <Container fluid>
         <Row>
-          <Col xs={sidebarWidth} sm={sidebarWidth} md={sidebarWidth} lg={sidebarWidth} xl={sidebarWidth} >
+          <Col xs={3} sm={2} md={2} lg={2} xl={sidebarWidth} >
             <SidebarTable sidebarModelList={sidebarTable} dummy={dummy} setDummy={setDummy}/>
             {/* <p>{logA.timestamp}</p> */}
           </Col> 
-          <Col xs={contentWidth} sm={contentWidth} md={contentWidth} lg={contentWidth} xl={contentWidth} style={{
+          <Col xs={9} sm={10} md={10} lg={10} xl={contentWidth} style={{
             backgroundColor: 'white'
           }}>
             <Row>
-              <Col xs={10} sm={10} md={11} lg={11} xl={11}>
+              <Col xs={8} sm={9} md={10} lg={10} xl={11}>
                 <p style={{ 
                   margin: '10px',
                   marginRight: '30px' 
@@ -115,7 +115,7 @@ function Gallery() {
                   marginRight: '30px' 
                 }}>Filter : {showDropdownFilter(filter)}</p>                
               </Col>
-              <Col xs={2} sm={2} md={1} lg={1} xl={1}>
+              <Col xs={1} sm={1} md={1} lg={1} xl={1}>
                 <DropdownButton id="dropdown-basic-button" title={showDropdownFilter(filter)} className="text-right" style={{
                   justifyContent: 'center',
                   marginTop: '10px',
@@ -128,11 +128,11 @@ function Gallery() {
               </Col>
             </Row>
             <Row>
-              <GalleryCardArea />
+              <GalleryCardArea galleryData={galleryData}/>
             </Row>
             <Row>
               <GetGallery ref={childRef} />
-              <p>{galleryData.length}</p>
+              {/* <p>{galleryData.length}</p> */}
             </Row>
           </Col> 
         </Row>
