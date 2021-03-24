@@ -1,8 +1,8 @@
 export interface IGalleryQueryResult {
-    _id : IGallery['_id'];
-    log_id : IGallery['log_id'];
-    thumbnailUrl : IGallery['thumbnailUrl'];
-    fullUrl : IGallery['fullUrl'];
+    _id : string ; 
+    log_id : string ;
+    thumbnailUrl : string ;
+    fullUrl : string ; 
     logDocument : ILog;
 }
 
