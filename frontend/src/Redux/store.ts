@@ -7,12 +7,13 @@ import filterSlice from './filterSlice';
 import currentLogModelNameSlice from './currentLogModelNameSlice';
 import currentLogFruitNameSlice from './currentLogFruitNameSlice';
 import logTableSlice from './logTableSlice';
+import galleryDataSlice from './galleryDataSlice';
 
 const persistConfig = {
     key: 'root',
     storage,
     //Whitelist for saving in persistance storage
-    whitelist: ['selectedID', 'page', 'filter', 'currentLogModelName', 'currentLogFruitName', 'logTable']
+    whitelist: ['selectedID', 'page', 'filter', 'currentLogModelName', 'currentLogFruitName', 'logTable', 'galleryData']
 }
 
 const rootReducer = combineReducers({
@@ -21,7 +22,8 @@ const rootReducer = combineReducers({
     filter: filterSlice,
     currentLogModelName: currentLogModelNameSlice,
     currentLogFruitName: currentLogFruitNameSlice,
-    logTable: logTableSlice
+    logTable: logTableSlice,
+    galleryData: galleryDataSlice
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
