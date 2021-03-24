@@ -97,7 +97,7 @@ export class GalleryDao implements ILogDao {
             }
             result.push(galleryQueryRes)
         })
-        return result;
+        return result.reverse();
 
     }
 
