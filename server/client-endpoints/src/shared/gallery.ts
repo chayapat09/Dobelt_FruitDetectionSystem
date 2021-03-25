@@ -29,7 +29,7 @@ export const deleteNoReferenceImages = async () => {
     });
     fileList.forEach(fileName => {
         if (re.test(fileName) && !existFileName.has(fileName.substr(0 , 24) )) {
-            fs.rm(path.join(galleryPath , fileName) , (err) => {
+            fs.remove(path.join(galleryPath , fileName) , (err) => {
                 if (err) {
                     logger.info(`File : ${fileName} Delete Failed!`);
                     return;
