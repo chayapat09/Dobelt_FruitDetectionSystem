@@ -36,3 +36,9 @@ io.on('connection' , (socket : Socket) => {
 })
 
 export const Io = io;
+
+/*
+onConnect -> Send ping to device to gather information what robot_id and device is this
+ConnectionController Send socket to Service
+
+*/

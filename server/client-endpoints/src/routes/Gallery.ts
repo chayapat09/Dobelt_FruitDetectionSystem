@@ -1,6 +1,6 @@
 import { getGallery } from '@controller/Gallery';
 import galleryDao from '@daos/Gallery/Gallery';
-import { getPathToGallery } from '@shared/gallery';
+import { deleteNoReferenceImages, getPathToGallery } from '@shared/gallery';
 import { GalleryQueryResult } from '@type/client-server-type/type_gallery';
 import { Request, Response, Router } from 'express';
 import { ObjectID } from 'mongodb';
@@ -91,4 +91,15 @@ router.post('/upload', upload.single('image') , async ( req: Request , res:Respo
 });
 
 // post body.log_id = lo
+
+
+/******************************************************************************
+ *       Garbage Collection Gallery Image Files - "DELETE /api/gallery"
+ ******************************************************************************/
+
+router.delete('/' , async (req , res) => {
+    await deleteNoReferenceImages();
+    res.json({ok : true});
+
+})
 export default router;
