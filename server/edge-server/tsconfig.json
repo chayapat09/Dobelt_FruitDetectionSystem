@@ -78,13 +78,13 @@
       "@serverExpress": [
         "src/Server.Express"
       ],
-      "@in-memory-data": [
+      "@in-memory-data/*": [
         "src/in-memory-data/*"
       ],
-      "@controller": [
+      "@controller/*": [
         "src/controller/*"
       ],
-      "@service": [
+      "@service/*": [
         "src/service/*"
       ]
     },

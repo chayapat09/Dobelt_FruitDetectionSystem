@@ -2,7 +2,7 @@
 
 import logger from "@shared/Logger";
 import { socketEmit } from "@shared/socketEmit";
-import EventEmitter from "node:events";
+import EventEmitter from "events";
 import { Socket } from "socket.io";
 
 
@@ -15,11 +15,14 @@ export interface BeltState {
     clientState : number ; 
     sensorState : number ;
 }
+
+// TODO : Timeout -> DO a reconnection
+
 /*
 @ socket event to Edge : belt::beltState -> number
 @ socket event from Edge : belt::detectionSensorState : number
 */
-class Belt extends EventEmitter {
+export class Belt extends EventEmitter {
     static NOT_DETECTED = 0; static DETECTED = 1;
     static BELT_STOP = 0;    static BELT_MOVE = 1;
 
@@ -47,7 +50,8 @@ class Belt extends EventEmitter {
     onDisconnected(reason : string) {
         // Off all socket then wait for garbage collector to clean things up
         if (this.socket === null) return;
-        this.unSubscribedSocketTopic(this.socket);
+        // this.unSubscribedSocketTopic(this.socket);
+        
         this.socket = null;
     }
 
@@ -58,12 +62,16 @@ class Belt extends EventEmitter {
     }
 
     subscribedSocketTopic(socket : Socket) {
-        socket.on(Belt.from_detectionSensorState , this.detectionSensorStateCallback);
-        socket.on('disconnect' , this.onDisconnected);
+        socket.on(Belt.from_detectionSensorState , (state : number) => {
+            this.detectionSensorStateCallback(state);
+        });
+        socket.on('disconnect' , (reason) => {
+            this.onDisconnected(reason);
+        });
     }
-    unSubscribedSocketTopic(socket : Socket) {
-        socket.off(Belt.from_detectionSensorState , this.detectionSensorStateCallback);
-    }
+    // unSubscribedSocketTopic(socket : Socket) {
+    //     socket.off(Belt.from_detectionSensorState , this.detectionSensorStateCallback);
+    // }
 
     async initializedNewSocket(socket : Socket , fromConstructor : boolean) {
         // Load state from saved tmp or
@@ -73,11 +81,12 @@ class Belt extends EventEmitter {
         // else reinitialized all robot state
         // TODO : if state diff == 1 we can assume ack was corrupted
         // we can move server state to next state and continue executions
-
+        this.socket = socket;
         // Sub first then send pingstate
         this.subscribedSocketTopic(socket);
 
         const res : BeltState = await socketEmit(socket , Belt.to_getStates , '');
+        console.log(res);
         if (res.clientState === this.serverState && !fromConstructor) {
             // use BeltState as input for target state now garuntee no other event comes before below are executes
             this.setDetectionSensorState(res.sensorState);
@@ -87,6 +96,7 @@ class Belt extends EventEmitter {
             // Reset all
             const res2 = await socketEmit(socket , Belt.to_beltState , Belt.BELT_STOP);
             this.init();
+            await this.setDetectionSensorState(res.sensorState);
         }
     }
 
@@ -97,13 +107,18 @@ class Belt extends EventEmitter {
 
 
     // Setter
-    private setDetectionSensorState(state : number) {
-        if (state !== Belt.NOT_DETECTED && state !== Belt.NOT_DETECTED) 
+    private async setDetectionSensorState(state : number) {
+        if (state !== Belt.NOT_DETECTED && state !== Belt.DETECTED) 
             throw Error('Detection State Error');
 
         try {
-            this.stateController(state);
-            
+            if (state === Belt.DETECTED) {
+
+                await this.stateController(Belt.BELT_STOP);
+            }
+            else {
+                await this.stateController(Belt.BELT_MOVE);
+            }
         }
         catch (err) {
             throw err;
@@ -164,6 +179,7 @@ class Belt extends EventEmitter {
             default:
                 throw Error('Error @ Belt State Controller');
         }
+        console.log(this.serverState === BELT_SERVER_STATE.BELT_MOVING ? 'BELT is MOVING' : 'BELT is STOP');
     }
 
     // stateBeltStop() {
