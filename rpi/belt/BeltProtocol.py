@@ -8,6 +8,11 @@ import socketio
 
 sio = socketio.Client()
 
+NOT_DETECTED = 0; DETECTED = 1
+BELT_STOP = 0   ; BELT_MOVE = 1
+
+clientState = BELT_STOP
+sensorState = NOT_DETECTED
 # @sio.event
 # def message(data):
 #     print('I received a message!')

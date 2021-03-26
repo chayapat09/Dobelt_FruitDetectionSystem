@@ -31,7 +31,7 @@ export class Belt extends EventEmitter {
     static from_detectionSensorState = 'belt::detectionSensorState';
 
     private detectionSensorState : number = 0;
-    private serverState : number = 0; // ignore this replace by init
+    private serverState : number = 0; // ignore this replace by init // = client_state
 
     private socket : Socket | null = null;
     // private lastdetectionSensorEventId : string | null  = null; 
@@ -264,3 +264,6 @@ export class Belt extends EventEmitter {
 // BELT consume DOBOT EVENT this working independently from others
 // DOBOT CAMERA AND PREDICTION Working through RobotSequantialController
 // GRIPPER as same as belt (no constrains)
+
+
+// Control # Execute Path Parallelism to Balance
