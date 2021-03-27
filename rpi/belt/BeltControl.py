@@ -4,7 +4,7 @@ import threading
 
 
 class ButtonHandler(threading.Thread):
-    def __init__(self, pin, func, beltControl , edge='both', bouncetime=200):
+    def __init__(self, pin, func , edge='both', bouncetime=200):
         super().__init__(daemon=True)
 
         self.edge = edge
@@ -31,35 +31,47 @@ class ButtonHandler(threading.Thread):
                 ((pinval == 1 and self.lastpinval == 0) and
                  (self.edge in ['rising', 'both']))
         ):
-            self.func(beltControl,*args)
+            self.func(pinval)
 
         self.lastpinval = pinval
         self.lock.release()
         
-def real_cb(beltControl , *args):
-    print('Button Pressed!')
-    Camera.TestCameraSystem()
-
-
 class BeltControl :
-    def __init__(self , port , brudrate = 9600 , sensorPin = 37) :
-        #self.uart = serial.Serial(port,brudrate,timeout=0)
-        #self.uart.open()
-        self.uart = 'ok'
+    def __init__(self ,sensorCallback, port = '/dev/ttyUSB0' , brudrate = 9600 , sensorPin = 37) :
+        self.sensorCallback = sensorCallback
+        self.uart = serial.Serial(port,brudrate,timeout=0)
+        self.uart.close()
+        self.uart.open()
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(sensorPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        cb = ButtonHandler(sensorPin, self.callback, self , edge='both', bouncetime=20)
+        cb = ButtonHandler(sensorPin, self.callback , edge='both', bouncetime=20)
         self.cb = cb
         cb.start()
         GPIO.add_event_detect(sensorPin, GPIO.RISING, callback=cb)
-
-
-    def callback(self ,beltControl, *args) :
-        print('CallBack')
-        print(self.uart)
+        self.beltState = 0
+        self.sensorState = GPIO.input(sensorPin)
+        
+        # Update First SensorState By Reading it here
+    
+    def callback(self, pinVal) :
+        self.sensorState = pinVal
+        self.sensorCallback(pinVal)
     def loop(self) :
         # Loop control
-        pass 
-
+        if self.beltState == 0 :
+            self.setBeltStop()
+        else :
+            self.setBeltMoving()
+    def setBeltState(self , state) :
+        self.beltState = state
+    def getBeltState(self) :
+        return self.beltState
+    def getSensorState(self) :
+        return self.sensorState
+    def setBeltMoving(self) :
+        self.uart.write('1'.encode())
+        
+    def setBeltStop(self) :
+        self.uart.write('0'.encode())
 
 
