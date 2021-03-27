@@ -44,5 +44,4 @@ sio.connect('http://161.200.199.2:5002')
 
 while True:
     belt.loop()
-    time.sleep(0.05)
     

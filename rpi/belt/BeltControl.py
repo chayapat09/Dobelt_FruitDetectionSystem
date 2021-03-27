@@ -37,7 +37,7 @@ class ButtonHandler(threading.Thread):
         self.lock.release()
         
 class BeltControl :
-    def __init__(self ,sensorCallback , stepperPin = [8,9,10,11] , motorSpeed = 4 , sensorPin = 37) :
+    def __init__(self ,sensorCallback , stepperPin = [35,36,37,38] , motorSpeed = 4 , sensorPin = 40) :
         self.sensorCallback = sensorCallback
         self.stepperPin = stepperPin
         self.motorSpeed = motorSpeed
@@ -49,7 +49,8 @@ class BeltControl :
         cb.start()
         GPIO.add_event_detect(sensorPin, GPIO.RISING, callback=cb)
 
-
+        for i in stepperPin :
+            GPIO.setup(i,GPIO.OUT)
         self.beltState = 0
         self.sensorState = GPIO.input(sensorPin)
 
