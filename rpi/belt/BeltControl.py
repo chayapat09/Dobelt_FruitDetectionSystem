@@ -37,41 +37,70 @@ class ButtonHandler(threading.Thread):
         self.lock.release()
         
 class BeltControl :
-    def __init__(self ,sensorCallback, port = '/dev/ttyUSB0' , brudrate = 9600 , sensorPin = 37) :
+    def __init__(self ,sensorCallback , stepperPin = [8,9,10,11] , motorSpeed = 4 , sensorPin = 37) :
         self.sensorCallback = sensorCallback
-        self.uart = serial.Serial(port,brudrate,timeout=0)
-        self.uart.close()
-        self.uart.open()
+        self.stepperPin = stepperPin
+        self.motorSpeed = motorSpeed
+
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(sensorPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         cb = ButtonHandler(sensorPin, self.callback , edge='both', bouncetime=20)
         self.cb = cb
         cb.start()
         GPIO.add_event_detect(sensorPin, GPIO.RISING, callback=cb)
+
+
         self.beltState = 0
         self.sensorState = GPIO.input(sensorPin)
+
         
         # Update First SensorState By Reading it here
     
     def callback(self, pinVal) :
         self.sensorState = pinVal
         self.sensorCallback(pinVal)
+
     def loop(self) :
         # Loop control
         if self.beltState == 0 :
             self.setBeltStop()
         else :
             self.setBeltMoving()
+
     def setBeltState(self , state) :
         self.beltState = state
+
     def getBeltState(self) :
         return self.beltState
+
     def getSensorState(self) :
         return self.sensorState
+
+
+    def rotate(self , cw) :
+
+        for i in range(8) :
+            msk = (1 << (i//2)) | ( (1 << (i//2 + 1)) if (i&1) else 0)
+            for j in range(4) :
+                pin = self.stepperPin[3-j] if cw else self.stepperPin[j]
+
+                if (1 << j) & msk or (1 << (j+4)) & msk :
+                    GPIO.output(pin,GPIO.HIGH)
+                else:
+                    GPIO.output(pin,GPIO.LOW)
+            
+            time.sleep(self.motorSpeed / 1000)
+    
+    def stopRotate(self) :
+        for i in range(4) :
+            GPIO.output(self.stepperPin[i],GPIO.LOW)
+
+
     def setBeltMoving(self) :
-        self.uart.write('1'.encode())
+        self.rotate(False)
         
     def setBeltStop(self) :
-        self.uart.write('0'.encode())
+        self.stopRotate()
 
 
+# Use GPIO Zero to handle bouncing / debouncing

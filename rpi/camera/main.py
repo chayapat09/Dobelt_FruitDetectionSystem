@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 import threading
 import Camera
-
+import time
 # Note run on boot
 '''
 sudo nano /etc/rc.local
@@ -50,4 +50,4 @@ GPIO.setup(BUTTON_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 cb = ButtonHandler(BUTTON_PIN, real_cb, edge='rising', bouncetime=20)
 cb.start()
 GPIO.add_event_detect(BUTTON_PIN, GPIO.RISING, callback=cb)
-inp = input()
+time.sleep(3600 * 100)

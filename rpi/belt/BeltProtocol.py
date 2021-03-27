@@ -39,7 +39,7 @@ def on_message(data):
 def on_message(data):
     return {'clientState' : belt.getBeltState() , 'sensorState' : convertLocalToServerSensorEmitVal(belt.getSensorState())}
 
-sio.connect('http://192.168.1.44:3000')
+sio.connect('http://161.200.199.2:5002')
 
 
 while True:
