@@ -44,7 +44,7 @@ def real_cb(*args):
     print('Button Pressed!')
     Camera.TestCameraSystem()
 
-BUTTON_PIN = 37
+BUTTON_PIN = 40
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(BUTTON_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 cb = ButtonHandler(BUTTON_PIN, real_cb, edge='rising', bouncetime=20)
