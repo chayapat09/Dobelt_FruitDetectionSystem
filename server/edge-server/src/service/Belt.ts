@@ -133,7 +133,7 @@ export class Belt extends EventEmitter {
 
     // Command to RPI
 
-    setPhysicalBeltStop() {
+    setPhysicalBeltMove() {
         const promise = new Promise<void>( (resolve , reject) => {
             if (this.socket === null) {
                 reject();
@@ -148,7 +148,7 @@ export class Belt extends EventEmitter {
         return promise
     }
 
-    setPhysicalBeltMove() {
+    setPhysicalBeltStop() {
         const promise = new Promise<void>( (resolve , reject) => {
             if (this.socket === null) {
                 reject();
