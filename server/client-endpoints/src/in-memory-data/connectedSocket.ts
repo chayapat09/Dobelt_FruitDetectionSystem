@@ -12,14 +12,15 @@ class ConnectedSocket {
     }
 
 
-    public deleteSocket(param : string | Socket) {
-        if (param instanceof Socket) {
-            this.connectedClientSocket.delete(param.id)
-        }
+    public deleteSocket(param : Socket) {
+        // if (param instanceof Socket) {
+        //     this.connectedClientSocket.delete(param.id)
+        // }
 
-        if (typeof param === 'string') {
-            this.connectedClientSocket.delete(param);
-        }
+        // if (typeof param === 'string') {
+        //     this.connectedClientSocket.delete(param);
+        // }
+            this.connectedClientSocket.delete(param.id);
     }
 
     public getAllSocket() : Socket[] {

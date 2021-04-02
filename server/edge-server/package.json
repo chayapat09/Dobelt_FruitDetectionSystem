@@ -25,7 +25,7 @@
     "@serverExpress": "dist/Server.Express",
     "@in-memory-data": "dist/in-memory-data",
     "@controller": "dist/controller",
-    "@service": "dist/controller"
+    "@service": "dist/service"
   },
   "eslintConfig": {
     "parser": "@typescript-eslint/parser",

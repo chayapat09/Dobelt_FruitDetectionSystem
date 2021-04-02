@@ -56,7 +56,10 @@ export class GalleryDao implements ILogDao {
             // TODO
         const db = await database.getDb();
         const collection = db.collection(GalleryDao.collectionName);
-        const galleryResult = await collection.find<IGallery>({}).toArray();
+        const galleryResult = await collection.find({}).toArray();
+        galleryResult.forEach(doc => {
+            doc._id = doc._id.toHexString();
+        })
         return galleryResult;
     }
 
