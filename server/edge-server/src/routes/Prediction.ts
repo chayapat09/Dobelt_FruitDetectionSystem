@@ -41,9 +41,9 @@ const upload = multer({storage: storage, fileFilter : fileFilter});
 router.post('/', upload.single('image') , async ( req: Request , res:Response )=> {
     const file = req.file;
     // console.log(file.buffer);
-    await predictionController(file);
+    const result = await predictionController(file);
 
-    res.json({ok : true});
+    res.json({ok : true , result : result});
 });
 
 export default router;
