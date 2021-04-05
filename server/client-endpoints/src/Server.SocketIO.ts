@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const io = new SocketIO.Server({
-    cors: cors
+    // cors: cors
 });
 
 
@@ -26,9 +26,7 @@ io.on('connection' , (socket : Socket) => {
 
     // On new connection
     connectedSocket.setSocket(socket.id , socket);
-    setInterval( () => {
-        socket.emit('test' , 'eiei');
-    } , 1000);
+
     socket.on('disconnect' , reason => {
 
         connectedSocket.deleteSocket(socket);
