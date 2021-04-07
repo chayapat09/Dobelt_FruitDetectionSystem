@@ -7,11 +7,15 @@ DIR = 15 #Orange
 STP = 14 #Green
 CW = 1
 CCW = 0
+SENSOR1 = 27
+SENSOR2 = 26
 delay = 0.001
  
-GPIO.setmode(GPIO.BCM)
+#GPIO.setmode(GPIO.BCM)
+GPIO.setmode(GPIO.BOARD)
  
-GPIO.setup(26, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(SENSOR1, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(SENSOR2, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(DIR, GPIO.OUT)
 GPIO.setup(STP, GPIO.OUT)
  
@@ -42,8 +46,9 @@ class Sensor :
  
 class DetectionSensor :
     def __init__(self) :
-        self.s1 = Sensor(27)
-        self.s2 = Sensor(26)
+        global SENSOR1 , SENSOR2
+        self.s1 = Sensor(SENSOR1)
+        self.s2 = Sensor(SENSOR2)
  
     def updateSensorValue(self) :
         self.s1.readSensorValue()
@@ -75,18 +80,18 @@ class Stepper :
             #print('drive Forward one step')
             GPIO.output(DIR, CW)
             GPIO.output(STP, GPIO.HIGH) 
-            time.sleep(0.0005)
+            time.sleep(delay)
             GPIO.output(STP, GPIO.LOW) 
-            time.sleep(0.0005)
+            time.sleep(delay)
         if self.dir == STEPPER_BACKWARD:
  
             #print('drive Backward one step')
         # drive One step code
             GPIO.output(DIR, CCW)
             GPIO.output(STP, GPIO.HIGH) 
-            time.sleep(0.0005)
+            time.sleep(delay)
             GPIO.output(STP, GPIO.LOW) 
-            time.sleep(0.0005)
+            time.sleep(delay)
  
  
         self.remainingSteps -= 1
@@ -216,6 +221,5 @@ def stateController() :
  
 while True :
     stateController()
- 
  
  
