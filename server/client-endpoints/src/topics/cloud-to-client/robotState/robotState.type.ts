@@ -2,7 +2,7 @@ export interface IRobotState {
     state : number ;
 }
 
-class RobotState implements IRobotState {
+export class RobotState implements IRobotState {
     static IDLE_STATE = 0;
     static WORKING_STATE = 1;
     static socketIO_topic = 'robotState'
@@ -14,7 +14,6 @@ class RobotState implements IRobotState {
     }
 }
 
-export default RobotState;
 
 // Server -> Client via Socket.IO
 

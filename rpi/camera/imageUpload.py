@@ -13,5 +13,5 @@ def imageUpload( fileBuffer ) :
             'image/jpeg')
     }
 
-    data = {'log_id' : log_id}
+    data = {}
     r1 = requests.post(UPLOAD_ENDPOINT , files = files,data = data)

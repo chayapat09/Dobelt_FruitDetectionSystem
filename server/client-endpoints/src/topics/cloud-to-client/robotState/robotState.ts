@@ -1,4 +1,4 @@
-import RobotState from './robotState.type';
+import {RobotState} from './robotState.type';
 import sendToSocketsClient from '../sendTo';
 import {Socket} from 'socket.io';
 import {RobotStateTopic} from '@shared/socketTopic'

@@ -164,7 +164,7 @@ def q3() :
     if stepper.isArrived() :
         print('Arrived @ center of Belt !!!')
         capture()
-        camera.imageUpload.imageUpload(open('img.jpg'))
+        camera.imageUpload.imageUpload(open('img.jpg' , 'rb'))
         q3_q4()
     pass
  
