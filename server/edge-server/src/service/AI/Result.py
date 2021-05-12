@@ -68,31 +68,31 @@ endOpenModel = time.time()
 
 
 # In[28]:
-test_filenames = os.listdir("./fromPiCamera")
-test_df = pd.DataFrame({
-    'filename': test_filenames
-})
-nb_samples = test_df.shape[0]
+def prediction() :
+    test_filenames = os.listdir("./fromPiCamera")
+    test_df = pd.DataFrame({
+        'filename': test_filenames
+    })
+    nb_samples = test_df.shape[0]
 
-test_gen = ImageDataGenerator(rescale=1./255)
-test_generator = test_gen.flow_from_dataframe(
-    test_df, 
-    "./fromPiCamera", 
-    x_col='filename',
-    y_col=None,
-    class_mode=None,
-    target_size=IMAGE_SIZE,
-    batch_size=batch_size,
-    shuffle=False
-)
+    test_gen = ImageDataGenerator(rescale=1./255)
+    test_generator = test_gen.flow_from_dataframe(
+        test_df, 
+        "./fromPiCamera", 
+        x_col='filename',
+        y_col=None,
+        class_mode=None,
+        target_size=IMAGE_SIZE,
+        batch_size=batch_size,
+        shuffle=False
+    )
 
 #startPredict = time.time()
-def prediction() :
+
     predict = model.predict(test_generator, steps=np.ceil(nb_samples/batch_size))
 
     #endPredict = time.time()
     #print("Predict  time", endPredict - startPredict)
-
     test_df['category'] = np.argmax(predict, axis=-1)
     test_df = test_df.sort_values("category")
     ans = list()
