@@ -113,7 +113,7 @@ function Logging() {
                 <p style={{ 
                   margin: '10px',
                   marginRight: '30px' 
-                }}>Fruit type : {currentLogFruitName}</p>
+                }}>Type of Object : {currentLogFruitName}</p>
                 <p style={{ 
                   margin: '10px', 
                   marginRight: '30px' 
