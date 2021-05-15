@@ -2,7 +2,7 @@ import React from 'react';
 
 function EachLogTable(props: any) {
 
-  const showResult:string = (props.result == 0 ? 'Normal': 'Defected');
+  const showResult:string = (props.result == 0 ? 'Cat': 'Dog');
 
   return (
     <tr>

@@ -8,9 +8,9 @@ function RobotState() {
 
   useEffect(()=>{
     console.log('run useEffect!')
-    socket.on( 'connection', ({ val }: { val: number }) => {
-      console.log(val);
-      setRobotState(val);
+    socket.on( 'robotState', (Obj: any) => {
+      console.log(Obj);
+      // setRobotState(val);
     });
   }, []);
 

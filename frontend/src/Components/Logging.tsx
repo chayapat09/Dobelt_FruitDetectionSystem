@@ -42,7 +42,7 @@ function Logging() {
   const childRef: any = useRef();
 
   const showDropdownFilter = (filter: number) => {
-    return filter===0 ? 'No Filter': filter === 1 ? 'Normal' : 'Defected';
+    return filter===0 ? 'All': filter === 1 ? 'Cat' : 'Dog';
   }
 
   const handleNoFilter = () => {
@@ -125,9 +125,9 @@ function Logging() {
                   marginTop: '10px',
                   marginRight: '10px'
                 }}>
-                  <Dropdown.Item onClick={handleNoFilter}>No Filter</Dropdown.Item>
-                  <Dropdown.Item onClick={handleNormal}>Normal</Dropdown.Item>
-                  <Dropdown.Item onClick={handleDefected}>Defected</Dropdown.Item>
+                  <Dropdown.Item onClick={handleNoFilter}>All</Dropdown.Item>
+                  <Dropdown.Item onClick={handleNormal}>Cat</Dropdown.Item>
+                  <Dropdown.Item onClick={handleDefected}>Dog</Dropdown.Item>
                 </DropdownButton>
               </Col>
             </Row>
