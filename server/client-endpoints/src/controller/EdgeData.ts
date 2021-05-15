@@ -5,7 +5,7 @@ import modelSocket from '@in-memory-data/model-socket';
 import send_predictionSummary from '@topics/cloud-to-client/predictionSummary/predictionSummary';
 import PredictionSummary from '@topics/cloud-to-client/predictionSummary/predictionSummary.type';
 import send_robotState from '@topics/cloud-to-client/robotState/robotState';
-import RobotState from '@topics/cloud-to-client/robotState/robotState.type';
+import {RobotState} from '@topics/cloud-to-client/robotState/robotState.type';
 import { Socket } from 'socket.io';
 
 export const robotState = (robotState : number) => {

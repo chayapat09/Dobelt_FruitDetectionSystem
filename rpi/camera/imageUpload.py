@@ -3,9 +3,9 @@ import requests
 
 # open('/Users/chayapat/Desktop/frames/2021-2-16_2_1_R.jpg', 'rb')
 
-def imageUpload(log_id , fileBuffer ) :
+def imageUpload( fileBuffer ) :
     # TODO : change to Edge UPLOAD ENDPOINT
-    UPLOAD_ENDPOINT = 'http://161.200.199.2:5002/api/gallery/upload' 
+    UPLOAD_ENDPOINT = 'http://161.200.199.2:5000/api/prediction' 
     files = {
         'image': (
             'img.jpg', 
@@ -13,5 +13,5 @@ def imageUpload(log_id , fileBuffer ) :
             'image/jpeg')
     }
 
-    data = {'log_id' : log_id}
+    data = {}
     r1 = requests.post(UPLOAD_ENDPOINT , files = files,data = data)

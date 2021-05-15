@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const io = new SocketIO.Server({
-    cors: cors
+    // cors: cors
 });
 
 
